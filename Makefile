@@ -6,13 +6,13 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/08 15:06:42 by ldutriez          #+#    #+#              #
-#    Updated: 2023/02/08 15:32:53 by ldutriez         ###   ########.fr        #
+#    Updated: 2023/02/08 17:23:42 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = RSB
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CFLAGS = -Wall -Wextra -Werror
 
 SRC_DIR = adder
 
