@@ -6,13 +6,40 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/08 15:06:42 by ldutriez          #+#    #+#              #
-#    Updated: 2023/02/08 17:23:42 by ldutriez         ###   ########.fr        #
+#    Updated: 2023/02/08 17:31:32 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+_GREY=	$'\033[30m
+_RED=	$'\033[31m
+_GREEN=	$'\033[32m
+_YELLOW=$'\033[33m
+_BLUE=	$'\033[34m
+_PURPLE=$'\033[35m
+_CYAN=	$'\033[36m
+_WHITE=	$'\033[37m
 
 NAME = RSB
 CC = c++
 CFLAGS = -Wall -Wextra -Werror
+
+DEBUG =
+ifeq ($(DEBUG), fs)
+	CFLAGS += -fsanitize=address
+	CFLAGS += -g3
+	CFLAGS += -O0
+	msg = $(shell echo "$(_PURPLE)fsanitize and debug flags are added.$(_WHITE)")
+	useless := $(info $(msg))
+else ifeq ($(DEBUG), vl)
+	CFLAGS += -g3
+	CFLAGS += -O0
+	msg = $(shell echo "$(_PURPLE)Valgrind and debug flags are added. Take care to rebuild the program entirely if you already used valgrind.$(_WHITE)")
+	useless := $(info $(msg))
+else
+	CFLAGS += -O3
+	msg = $(shell echo "$(_PURPLE)Debug mode not enabled. Optimization flags are added.$(_WHITE)")
+	useless := $(info $(msg))
+endif
 
 SRC_DIR = adder
 
