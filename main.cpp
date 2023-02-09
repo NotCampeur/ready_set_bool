@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:06:44 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/09 14:27:13 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/09 14:32:27 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@
 #include <string>
 #include <limits>
 
-unsigned int adder(unsigned int a, unsigned int b);
+__UINT32_TYPE__ adder(__UINT32_TYPE__ a, __UINT32_TYPE__ b);
 
 void adder_test(void)
 {
 	std::cout << "Testing adder:\n"
 			<< "\tpress enter to keep testing this module, n to move to the next one\n";
 
-	unsigned int a, b, result;
+	__UINT32_TYPE__ a, b, result;
 	auto tester = [&](void) -> void
 	{
-		a = rand() % std::numeric_limits<unsigned int>::max();
-		b = rand() % std::numeric_limits<unsigned int>::max();
+		a = rand() % std::numeric_limits<__UINT32_TYPE__>::max();
+		b = rand() % std::numeric_limits<__UINT32_TYPE__>::max();
 		result = adder(a, b);
 		std::cout << a << " + " << b << " = " << result << " (expected: " << a + b << ")\n";
 	};
@@ -45,7 +45,7 @@ void adder_test(void)
 void seed_selection(void)
 {
 	std::string input;
-	unsigned int seed;
+	__UINT32_TYPE__ seed;
 	
 	std::cout << "Enter a seed if you want to use a specific seed, or just press enter to use the current time as seed: ";
 	std::getline(std::cin, input);
