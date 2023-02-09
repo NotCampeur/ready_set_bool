@@ -6,7 +6,7 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/08 15:06:42 by ldutriez          #+#    #+#              #
-#    Updated: 2023/02/08 17:31:32 by ldutriez         ###   ########.fr        #
+#    Updated: 2023/02/09 14:46:54 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,14 +41,17 @@ else
 	useless := $(info $(msg))
 endif
 
-SRC_DIR = adder
+SRC_DIR = adder \
+			multiplier
 
 vpath %.cpp $(foreach dir, $(SRC_DIR), $(dir):)
 
 ADDER_SRC = adder.cpp
+MULTIPLIER_SRC = multiplier.cpp
 
 SRCS = main.cpp \
-		$(ADDER_SRC)
+		$(ADDER_SRC) \
+		$(MULTIPLIER_SRC)
 
 OBJ_DIR = objs
 OBJS = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)
