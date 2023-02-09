@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/09 20:45:30 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/09 21:15:56 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ namespace rsb
 					else if (_root->data == '^')
 						result = left ^ right;
 					else if (_root->data == '>')
-						result = left > right;
+						result = !(left && !right);
 					else if (_root->data == '=')
 						result = left == right;
 				}
@@ -164,7 +164,8 @@ namespace rsb
 			rpn_abstract_syntax_tree(const std::vector<T> & tokens)
 			: _root(nullptr)
 			{
-				build(tokens);
+				if (tokens.size() > 0)
+					build(tokens);
 			}
 
 			~rpn_abstract_syntax_tree()
@@ -200,7 +201,11 @@ namespace rsb
 					{
 						if ((stack.size() < 2 && token != '!') ||
 							(stack.size() < 1 && token == '!'))
-							throw std::invalid_argument("Invalid token");
+						{
+							for (node<T> * node : stack)
+								delete node;
+							throw std::invalid_argument("Invalid formula");
+						}
 						if (token == '!' && stack.size() > 0)
 						{
 							node<T>		*left = stack.back();
@@ -221,6 +226,8 @@ namespace rsb
 					}
 					else
 					{
+						for (node<T> * node : stack)
+							delete node;
 						throw std::invalid_argument("Invalid token");
 					}
 				}
