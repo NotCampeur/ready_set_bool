@@ -6,7 +6,7 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/08 15:06:42 by ldutriez          #+#    #+#              #
-#    Updated: 2023/02/09 14:46:54 by ldutriez         ###   ########.fr        #
+#    Updated: 2023/02/09 15:12:27 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,13 +41,15 @@ else
 	useless := $(info $(msg))
 endif
 
-SRC_DIR = adder \
-			multiplier
+SRC_DIR = $(shell find srcs -type d)
+
+INC_DIR = $(shell find includes -type d)
+IFLAGS = $(foreach dir, $(INC_DIR), -I$(dir))
 
 vpath %.cpp $(foreach dir, $(SRC_DIR), $(dir):)
 
-ADDER_SRC = adder.cpp
-MULTIPLIER_SRC = multiplier.cpp
+ADDER_SRC = adder.cpp adder_tests.cpp
+MULTIPLIER_SRC = multiplier.cpp multiplier_tests.cpp
 
 SRCS = main.cpp \
 		$(ADDER_SRC) \
@@ -59,19 +61,19 @@ OBJS = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)
 all : $(NAME)
 
 $(OBJ_DIR) :
-	mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o : %.cpp | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 clean :
-	rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR)
 
 fclean : clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re : fclean all
 
