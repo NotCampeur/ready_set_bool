@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:06:44 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/09 15:11:16 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:24:09 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ int main()
 	seed_selection();
 	adder_test();
 	multiplier_test();
+	gray_code_test();
 	return EXIT_SUCCESS;
 }
