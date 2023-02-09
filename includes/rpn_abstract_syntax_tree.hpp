@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/09 20:23:50 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/09 20:45:30 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ namespace rsb
 			
 			node(const node<T> & to_copy)
 			: data(to_copy.data)
-			, left(to_copy.left), right(to_copy.right)
+			, left(to_copy.left->clone()), right(to_copy.right.clone())
 			{}
 
 			~node()
@@ -77,8 +77,8 @@ namespace rsb
 				if (this != &to_assign)
 				{
 					data = to_assign.data;
-					left = to_assign.left;
-					right = to_assign.right;
+					left = to_assign.left.clone();
+					right = to_assign.right.clone();
 				}
 				return *this;
 			}
@@ -128,8 +128,12 @@ namespace rsb
 				else if (token_checker::is_operator(_root->data))
 				{
 					bool left(rpn_abstract_syntax_tree(_root->left).evaluate());
-					bool right(rpn_abstract_syntax_tree(_root->right).evaluate());
+					bool right;
+					
+					if (_root->data != '!')
+						right = rpn_abstract_syntax_tree(_root->right).evaluate();
 
+					std::cout << std::boolalpha << left << " " << _root->data << " " << right << std::endl;
 					if (_root->data == '!')
 						result = !left;
 					else if (_root->data == '&')
@@ -194,6 +198,18 @@ namespace rsb
 					}
 					else if (token_checker::is_operator(token))
 					{
+						if ((stack.size() < 2 && token != '!') ||
+							(stack.size() < 1 && token == '!'))
+							throw std::invalid_argument("Invalid token");
+						if (token == '!' && stack.size() > 0)
+						{
+							node<T>		*left = stack.back();
+							stack.pop_back();
+							node<T>		*new_node = new node<T>(token);
+							new_node->left = left;
+							stack.push_back(new_node);
+							continue;
+						}
 						node<T>		*right = stack.back();
 						stack.pop_back();
 						node<T>		*left = stack.back();
