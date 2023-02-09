@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/09 21:15:56 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/09 21:20:57 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ namespace rsb
 				else if (token_checker::is_operator(_root->data))
 				{
 					bool left(rpn_abstract_syntax_tree(_root->left).evaluate());
-					bool right;
+					bool right(false);
 					
 					if (_root->data != '!')
 						right = rpn_abstract_syntax_tree(_root->right).evaluate();
