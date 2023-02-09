@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:46:39 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/09 18:09:43 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/09 20:22:22 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,5 @@ bool eval_formula(const std::string &formula)
 		std::cerr << e.what() << '\n';
 		return false;
 	}
-	
-	tree.print();
-	return true;
+	return tree.evaluate();
 }

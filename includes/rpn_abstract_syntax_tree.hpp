@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/09 18:15:40 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/09 20:23:50 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ namespace rsb
 			}
 	};
 
+
 	template <typename T>
 	class node
 	{
@@ -71,7 +72,7 @@ namespace rsb
 				delete right;
 			}
 
-			node<T>		&operator=(const node<T> & to_assign)
+			node<T>	&operator=(const node<T> & to_assign)
 			{
 				if (this != &to_assign)
 				{
@@ -80,6 +81,19 @@ namespace rsb
 					right = to_assign.right;
 				}
 				return *this;
+			}
+
+			// Return an allocated copy of the node and its children
+			// Used for rpn_abstract_syntax_tree's deep copy
+			node<T> *clone(void) const
+			{
+				node<T> *result(new node<T>(data));
+
+				if (left != nullptr)
+					result->left = left->clone();
+				if (right != nullptr)
+					result->right = right->clone();
+				return result;
 			}
 
 			T			data;
@@ -96,11 +110,51 @@ namespace rsb
 	> class rpn_abstract_syntax_tree
 	{
 		public:
+
+			// A boolean evaluator function
+			// You can use it to evaluate a boolean expression
+			// throw std::runtime_error if the tree is empty or malformed
+			// throw std::runtime_error if the token checker is not a boolean_token_check
+			bool evaluate(void) const
+			{
+				bool result(false);
+				
+				if (std::is_same<token_checker, rsb::boolean_token_check>::value == false)
+					throw std::runtime_error("Wrong token checker");
+				if (_root == nullptr)
+					throw std::runtime_error("Empty or malformed tree");
+				if (token_checker::is_value(_root->data))
+					return (_root->data == '1');
+				else if (token_checker::is_operator(_root->data))
+				{
+					bool left(rpn_abstract_syntax_tree(_root->left).evaluate());
+					bool right(rpn_abstract_syntax_tree(_root->right).evaluate());
+
+					if (_root->data == '!')
+						result = !left;
+					else if (_root->data == '&')
+						result = left && right;
+					else if (_root->data == '|')
+						result = left || right;
+					else if (_root->data == '^')
+						result = left ^ right;
+					else if (_root->data == '>')
+						result = left > right;
+					else if (_root->data == '=')
+						result = left == right;
+				}
+				return result;
+			}
+
 			rpn_abstract_syntax_tree() : _root(nullptr)
 			{}
 
 			rpn_abstract_syntax_tree(const rpn_abstract_syntax_tree<T> & to_copy)
-			: _root(to_copy._root)
+			: _root(to_copy._root->clone())
+			{}
+
+			rpn_abstract_syntax_tree(node<T> * node)
+			: _root(node->clone())
 			{}
 
 			rpn_abstract_syntax_tree(const std::vector<T> & tokens)
@@ -120,8 +174,7 @@ namespace rsb
 				{
 					if (_root != nullptr)
 						delete _root;
-					if (to_assign._root != nullptr)
-						_root = new node<T>(*(to_assign._root));
+					_root = to_assign._root->clone();
 				}
 				return *this;
 			}
@@ -164,7 +217,6 @@ namespace rsb
 				_print(_root);
 			}
 
-
 		private:
 			void _print(node<T> * n)
 			{
@@ -182,7 +234,6 @@ namespace rsb
 			
 			node<T>			*_root;
 	};
-
 };
 
 #endif
