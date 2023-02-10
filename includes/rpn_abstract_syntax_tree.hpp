@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/10 05:19:13 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/10 05:58:39 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,10 @@ namespace rsb
 				{
 					if (token_checker::is_value(token))
 					{
+						if (stack.size() == 2)
+						{
+							throw std::invalid_argument("Invalid formula, missing operator");
+						}
 						stack.push_back(new node<T>(token));
 					}
 					else if (token_checker::is_operator(token))
@@ -235,6 +239,12 @@ namespace rsb
 				}
 				_root = stack.back();
 				stack.pop_back();
+				if (stack.size() != 0)
+				{
+					for (node<T> * node : stack)
+						delete node;
+					throw std::invalid_argument("Invalid formula, missing operator");
+				}
 			}
 
 			void print()
