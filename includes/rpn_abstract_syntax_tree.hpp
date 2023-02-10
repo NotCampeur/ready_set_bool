@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/09 21:20:57 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/10 05:19:13 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,6 @@ namespace rsb
 					if (_root->data != '!')
 						right = rpn_abstract_syntax_tree(_root->right).evaluate();
 
-					std::cout << std::boolalpha << left << " " << _root->data << " " << right << std::endl;
 					if (_root->data == '!')
 						result = !left;
 					else if (_root->data == '&')
@@ -187,10 +186,13 @@ namespace rsb
 			// Build the tree from a vector of tokens
 			// The vector should be in Reverse Polish Notation
 			// Throws on invalid token
+			// If the tree is already built, it will be deleted and rebuilt
 			void build(const std::vector<T> & tokens)
 			{
 				std::vector<node<T> *>	stack;
 
+				if (_root != nullptr)
+					delete _root;
 				for (const T & token : tokens)
 				{
 					if (token_checker::is_value(token))
