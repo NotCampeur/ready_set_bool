@@ -6,7 +6,7 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/08 15:06:42 by ldutriez          #+#    #+#              #
-#    Updated: 2023/02/09 18:00:00 by ldutriez         ###   ########.fr        #
+#    Updated: 2023/02/10 04:26:08 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,12 +52,14 @@ ADDER_SRC = adder.cpp adder_tests.cpp
 MULTIPLIER_SRC = multiplier.cpp multiplier_tests.cpp
 GRAY_CODE_SRC = gray_code.cpp gray_code_tests.cpp
 EVAL_FORMULA_SRC = eval_formula.cpp eval_formula_tests.cpp
+TRUTH_TABLE_SRC = truth_table.cpp truth_table_tests.cpp
 
 SRCS = main.cpp \
 		$(ADDER_SRC) \
 		$(MULTIPLIER_SRC) \
 		$(GRAY_CODE_SRC) \
-		$(EVAL_FORMULA_SRC)
+		$(EVAL_FORMULA_SRC) \
+		$(TRUTH_TABLE_SRC)
 
 OBJ_DIR = objs
 OBJS = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)
