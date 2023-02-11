@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 04:06:07 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/10 05:17:42 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/11 13:28:07 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,10 @@ void print_truth_table(const std::string &formula)
 	for (std::map<char, bool>::size_type i(0); i < max_variations; ++i)
 	{
 		formula_variation = formula;
-		std::map<char, bool>::reverse_iterator rit(variables.rbegin());
 		for (std::map<char, bool>::iterator it(variables.begin());
-			it != variables.end(); ++it, ++rit)
+			it != variables.end(); ++it)
 		{
-			it->second = (i & (1 << (rit->first - 'A'))) != 0;
+			it->second = (i & (1 << (std::distance(it, variables.end()) - 1))) != 0;
 			std::cout << "| " << it->second << " ";
 			std::replace(formula_variation.begin(), formula_variation.end(),
 				it->first, it->second == true ? '1' : '0');
