@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/11 16:18:04 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/11 17:12:50 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ namespace rsb
 					throw std::runtime_error("Wrong token checker");
 				if (_root == nullptr)
 					throw std::runtime_error("Empty or malformed tree");
-				if (token_checker::is_value(_root->data))
+				if (_checker.is_value(_root->data) == true)
 					return (_root->data == '1');
-				else if (token_checker::is_operator(_root->data))
+				else if (_checker.is_operator(_root->data) == true)
 				{
 					bool left(rpn_abstract_syntax_tree(_root->left).evaluate());
 					bool right(false);
@@ -67,19 +67,19 @@ namespace rsb
 				return result;
 			}
 
-			rpn_abstract_syntax_tree() : _root(nullptr)
+			rpn_abstract_syntax_tree() : _root(nullptr), _checker()
 			{}
 
-			rpn_abstract_syntax_tree(const rpn_abstract_syntax_tree<T> & to_copy)
-			: _root(to_copy._root->clone())
+			rpn_abstract_syntax_tree(const rpn_abstract_syntax_tree<T, token_checker> & to_copy)
+			: _root(to_copy._root->clone()), _checker()
 			{}
 
 			rpn_abstract_syntax_tree(node<T> * node)
-			: _root(node->clone())
+			: _root(node->clone()), _checker()
 			{}
 
 			rpn_abstract_syntax_tree(const std::vector<T> & tokens)
-			: _root(nullptr)
+			: _root(nullptr), _checker()
 			{
 				if (tokens.size() > 0)
 					build(tokens);
@@ -90,7 +90,8 @@ namespace rsb
 				delete _root;
 			}
 
-			rpn_abstract_syntax_tree<T>		&operator=(const rpn_abstract_syntax_tree<T> & to_assign)
+			rpn_abstract_syntax_tree<T, token_checker> &
+			operator=(const rpn_abstract_syntax_tree<T, token_checker> & to_assign)
 			{
 				if (this != &to_assign)
 				{
@@ -113,11 +114,11 @@ namespace rsb
 					delete _root;
 				for (const T & token : tokens)
 				{
-					if (token_checker::is_value(token))
+					if (_checker.is_value(token) == true)
 					{
 						stack.push_back(new node<T>(token));
 					}
-					else if (token_checker::is_operator(token))
+					else if (_checker.is_operator(token) == true)
 					{
 						if ((stack.size() < 2 && token != '!') ||
 							(stack.size() < 1 && token == '!'))
@@ -182,6 +183,7 @@ namespace rsb
 			}
 			
 			node<T>			*_root;
+			token_checker	_checker;
 	};
 };
 

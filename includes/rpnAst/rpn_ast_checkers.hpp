@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:14:42 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/11 16:15:34 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/11 17:13:47 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,40 @@
 
 namespace rsb
 {
-	// Default token checker used by the abstract syntax tree
-	// You can create your own token checker by creating a class with two static functions:
-	// static bool is_operator(const T & c)
-	// static bool is_value(const T & c)
-	// The first one should return true if the token is an operator
-	// The second one should return true if the token is a value
-	class token_check
+	class i_token_check
 	{
 		public:
-			static bool is_operator(const char & c)
+			virtual bool is_operator(const char & c) const = 0;
+			virtual bool is_value(const char & c) const = 0;
+	};
+	
+	// Default token checker used by the abstract syntax tree
+	// You can create your own token checker inheriting from i_token_check
+	class token_check : public i_token_check
+	{
+		public:
+			bool is_operator(const char & c) const
 			{
 				return (c == '+' || c == '-' || c == '*' || c == '/');
 			}
 
-			static bool is_value(const char & c)
+			bool is_value(const char & c) const
 			{
 				return (c >= '0' && c <= '9');
 			}
 	};
 
 	// Specialized token checker for boolean evaluation
-	class boolean_token_check
+	class boolean_token_check : public i_token_check
 	{
 		public:
-			static bool is_operator(const char & c)
+			bool is_operator(const char & c) const
 			{
 				return (c == '!' || c == '&' || c == '|' ||
 						c == '^' || c == '>' || c == '=');
 			}
 
-			static bool is_value(const char & c)
+			bool is_value(const char & c) const
 			{
 				return (c == '0' || c == '1');
 			}
@@ -56,7 +59,7 @@ namespace rsb
 	class variable_boolean_token_check : public boolean_token_check
 	{
 		public:
-			static bool is_value(const char & c)
+			bool is_value(const char & c) const
 			{
 				return ((c >= 'A' && c <= 'Z') || boolean_token_check::is_value(c));
 			}
