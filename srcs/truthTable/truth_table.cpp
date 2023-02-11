@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 04:06:07 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/11 13:28:07 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:00:32 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 #include "rpn_abstract_syntax_tree.hpp"
 #include <map>
 #include <algorithm>
+
+static void print_truth_table_header(const std::map<char, bool> &variables)
+{
+	for (std::pair<char, bool> pair : variables)
+		std::cout << "| " << pair.first << " ";
+	std::cout << "| = |\n";
+	for (std::map<char, bool>::size_type i(0); i < variables.size(); i++)
+		std::cout << "|---";
+	std::cout << "|---|\n";
+}
 
 // Print the truth table of a formula
 // The accepted formula is a string of characters
@@ -32,12 +42,7 @@ void print_truth_table(const std::string &formula)
 		if (c >= 'A' && c <= 'Z')
 			variables[c] = false;
 	std::cout << "Formula '" << formula << "' truth table\n";
-	for (std::pair<char, bool> pair : variables)
-		std::cout << "| " << pair.first << " ";
-	std::cout << "| = |\n";
-	for (std::map<char, bool>::size_type i(0); i < variables.size(); i++)
-		std::cout << "|---";
-	std::cout << "|---|\n";
+	print_truth_table_header(variables);
 	max_variations = 1 << variables.size();
 	for (std::map<char, bool>::size_type i(0); i < max_variations; ++i)
 	{
