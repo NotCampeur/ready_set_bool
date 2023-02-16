@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:14:42 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/11 17:13:47 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/16 14:32:17 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ namespace rsb
 			bool is_value(const char & c) const
 			{
 				return ((c >= 'A' && c <= 'Z') || boolean_token_check::is_value(c));
+			}
+			bool is_variable(const char & c) const
+			{
+				return (c >= 'A' && c <= 'Z');
 			}
 	};
 };
