@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:56:02 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/10 04:28:20 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:56:36 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void print_truth_table(const std::string &formula);
 void adder_test(void);
 void multiplier_test(void);
 void gray_code_test(void);
+void ast_printer(void);
 void eval_formula_test(void);
 void print_truth_table_test(void);
 

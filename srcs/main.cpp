@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:06:44 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/10 04:26:19 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:56:25 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int main()
 	adder_test();
 	multiplier_test();
 	gray_code_test();
+	ast_printer();
 	eval_formula_test();
 	print_truth_table_test();
 	return EXIT_SUCCESS;
