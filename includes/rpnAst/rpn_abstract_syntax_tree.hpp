@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/16 15:22:53 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:18:15 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,12 @@ namespace rsb
 				std::vector<node<T> *>	stack;
 
 				if (_root != nullptr)
+				{
 					delete _root;
+					_root = nullptr;
+				}
+				if (tokens.size() == 0)
+					return;
 				for (const T & token : tokens)
 				{
 					if (_checker.is_value(token) == true)
