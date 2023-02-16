@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/11 17:12:50 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:22:53 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define ABSTRACT_SYNTAX_TREE_HPP
 
 #include <vector>
+#include <map> //? Use in print_truth_table
+#include <algorithm> //? Use in print_truth_table for std::replace
 #include "rpn_ast_checkers.hpp"
 #include "rpn_ast_node.hpp"
 
@@ -28,45 +30,6 @@ namespace rsb
 	> class rpn_abstract_syntax_tree
 	{
 		public:
-
-			// A boolean evaluator function
-			// You can use it to evaluate a boolean expression
-			// throw std::runtime_error if the tree is empty or malformed
-			// throw std::runtime_error if the token checker is not a boolean_token_check
-			bool evaluate(void) const
-			{
-				bool result(false);
-				
-				if (std::is_same<token_checker, rsb::boolean_token_check>::value == false)
-					throw std::runtime_error("Wrong token checker");
-				if (_root == nullptr)
-					throw std::runtime_error("Empty or malformed tree");
-				if (_checker.is_value(_root->data) == true)
-					return (_root->data == '1');
-				else if (_checker.is_operator(_root->data) == true)
-				{
-					bool left(rpn_abstract_syntax_tree(_root->left).evaluate());
-					bool right(false);
-					
-					if (_root->data != '!')
-						right = rpn_abstract_syntax_tree(_root->right).evaluate();
-
-					if (_root->data == '!')
-						result = !left;
-					else if (_root->data == '&')
-						result = left && right;
-					else if (_root->data == '|')
-						result = left || right;
-					else if (_root->data == '^')
-						result = left ^ right;
-					else if (_root->data == '>')
-						result = !(left && !right);
-					else if (_root->data == '=')
-						result = left == right;
-				}
-				return result;
-			}
-
 			rpn_abstract_syntax_tree() : _root(nullptr), _checker()
 			{}
 
@@ -162,20 +125,126 @@ namespace rsb
 				}
 			}
 
+			std::string formula(void) const
+			{
+				std::string result;
+
+				if (_root != nullptr)
+					result = _root->formula();
+				return result;
+			}
+
+			// Print the truth table of the boolean formula
+			// throw std::runtime_error if the tree is empty or malformed
+			// throw std::runtime_error if the token checker is not a variable_boolean_token_check
+			void print_truth_table(void) const
+			{
+				if (std::is_same<token_checker, rsb::variable_boolean_token_check>::value == false)
+					throw std::runtime_error("Wrong token checker");
+				if (_root == nullptr)
+					return;
+
+				rsb::rpn_abstract_syntax_tree<T, rsb::boolean_token_check> evaluation_tree;
+				std::map<char, bool> variables;
+				bool result(false);
+				size_t max_variations(0);
+				std::string current_formula(formula());
+				std::string formula_variation;
+				
+				for (char var : current_formula)
+					if (_checker.is_variable(var) == true)
+						variables[var] = false;
+				_print_truth_table_header(variables);
+				max_variations = 1 << variables.size();
+				for (size_t i(0); i < max_variations; ++i)
+				{
+					formula_variation = current_formula;
+					for (typename std::map<char, bool>::iterator it(variables.begin());
+						it != variables.end(); ++it)
+					{
+						it->second = (i & (1 << (std::distance(it, variables.end()) - 1))) != 0;
+						std::cout << "| " << it->second << " ";
+						std::replace(formula_variation.begin(), formula_variation.end(),
+							it->first, it->second == true ? '1' : '0');
+					}
+					try
+					{
+						evaluation_tree.build(std::vector<char>(formula_variation.begin(), formula_variation.end()));
+					}
+					catch(const std::exception& e)
+					{
+						std::cerr << e.what() << '\n';
+						return;
+					}
+					result = evaluation_tree.evaluate();
+					std::cout << "| " << result << " |\n";
+				}
+			}
+
+			// A boolean evaluator function
+			// You can use it to evaluate a boolean expression
+			// throw std::runtime_error if the tree is empty or malformed
+			// throw std::runtime_error if the token checker is not a boolean_token_check
+			bool evaluate(void) const
+			{
+				bool result(false);
+				
+				if (std::is_same<token_checker, rsb::boolean_token_check>::value == false)
+					throw std::runtime_error("Wrong token checker");
+				if (_root == nullptr)
+					throw std::runtime_error("Empty or malformed tree");
+				if (_checker.is_value(_root->data) == true)
+					return (_root->data == '1');
+				else if (_checker.is_operator(_root->data) == true)
+				{
+					bool left(rpn_abstract_syntax_tree(_root->left).evaluate());
+					bool right(false);
+					
+					if (_root->data != '!')
+						right = rpn_abstract_syntax_tree(_root->right).evaluate();
+
+					if (_root->data == '!')
+						result = !left;
+					else if (_root->data == '&')
+						result = left && right;
+					else if (_root->data == '|')
+						result = left || right;
+					else if (_root->data == '^')
+						result = left ^ right;
+					else if (_root->data == '>')
+						result = !(left && !right);
+					else if (_root->data == '=')
+						result = left == right;
+				}
+				return result;
+			}
+
 			void print()
 			{
 				_print(_root);
 			}
 
 		private:
+			void _print_truth_table_header(const std::map<T, bool> &variables) const
+			{
+				for (std::pair<T, bool> pair : variables)
+					std::cout << "| " << pair.first << " ";
+				std::cout << "| = |\n";
+				for (typename std::map<T, bool>::size_type i(0); i < variables.size(); i++)
+					std::cout << "|---";
+				std::cout << "|---|\n";
+			}
+			
 			void _print(node<T> * n)
 			{
-				static int	indent = 0;
+				static int	indent = -1;
 				if (n == nullptr)
 					return ;
 				++indent;
 				_print(n->left);
-				for (int i = 0; i < indent; i++)
+				for (int i = 0; i < indent - 1; i++)
+					std::cout << "  ";
+				if (indent > 0)
 					std::cout << "--";
 				std::cout << n->data << std::endl;
 				_print(n->right);
