@@ -6,20 +6,12 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:53:22 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/16 17:15:03 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/18 17:45:35 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "ready_set_bool.hpp"
 #include "rpn_abstract_syntax_tree.hpp"
-
-static std::string get_formula(void)
-{
-	std::string formula;
-	std::cout << "Enter a formula to evaluate: ";
-	std::getline(std::cin, formula);
-	return formula;
-}
 
 void ast_printer(void)
 {

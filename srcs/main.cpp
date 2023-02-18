@@ -6,11 +6,19 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:06:44 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/16 16:56:25 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/18 17:49:35 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ready_set_bool.hpp"
+
+std::string get_formula(void)
+{
+	std::string formula;
+	std::cout << "Enter a formula: ";
+	std::getline(std::cin, formula);
+	return formula;
+}
 
 void seed_selection(void)
 {
@@ -45,5 +53,6 @@ int main()
 	ast_printer();
 	eval_formula_test();
 	print_truth_table_test();
+	negation_normal_form_test();
 	return EXIT_SUCCESS;
 }

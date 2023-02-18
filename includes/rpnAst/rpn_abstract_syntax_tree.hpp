@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/16 17:18:15 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/18 17:38:37 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ namespace rsb
 							stack.pop_back();
 							node<T>		*new_node = new node<T>(token);
 							new_node->left = left;
+							new_node->left->parent = new_node;
 							stack.push_back(new_node);
 							continue;
 						}
@@ -110,7 +111,9 @@ namespace rsb
 						stack.pop_back();
 						node<T>		*new_node = new node<T>(token);
 						new_node->left = left;
+						new_node->left->parent = new_node;
 						new_node->right = right;
+						new_node->right->parent = new_node;
 						stack.push_back(new_node);
 					}
 					else
@@ -224,12 +227,59 @@ namespace rsb
 				return result;
 			}
 
+			// Format the tree to only have !, & and | operators and simplify negation.
+			// AB&! => A!B!|
+			void negation_normal_form(void)
+			{
+				if (_root == nullptr)
+					return;
+				_negation_normal_form(_root);
+			}
+
 			void print()
 			{
 				_print(_root);
 			}
 
 		private:
+
+			void _negation_normal_form(node<T> * n)
+			{
+				if (n == nullptr)
+					return ;
+				_negation_normal_form(n->left);
+				_negation_normal_form(n->right);
+				if (n->data == '!')
+				{
+					if (n->left->data == '!')
+					{
+						node<T> *tmp(n->left->left);
+						n->left->left = nullptr;
+						if (_root == n)
+							_root = tmp;
+						else if (n->parent->left == n)
+							n->parent->left = tmp;
+						else if (n->parent->right == n)
+							n->parent->right = tmp;
+						delete n;
+						n = tmp;
+					}
+					else if (n->left->data == '&' || n->left->data == '|')
+					{
+						n->data = (n->left->data == '&') ? '|' : '&';
+						n->left->data = '!';
+						n->right = new node<T>('!');
+						n->right->left = n->left->right;
+						n->right->left->parent = n->right;
+						n->left->right = nullptr;
+						if (n->left->left->data == '!')
+							_negation_normal_form(n->left);
+						if (n->right->left->data == '!')
+							_negation_normal_form(n->right);
+					}
+				}
+			}
+
 			void _print_truth_table_header(const std::map<T, bool> &variables) const
 			{
 				for (std::pair<T, bool> pair : variables)

@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   eval_formula_tests.cpp                             :+:      :+:    :+:   */
+/*   negation_normal_form_tests.cpp                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 17:49:08 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/18 17:44:45 by ldutriez         ###   ########.fr       */
+/*   Created: 2023/02/16 17:53:24 by ldutriez          #+#    #+#             */
+/*   Updated: 2023/02/18 17:45:45 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ready_set_bool.hpp"
 
-void eval_formula_test(void)
+void negation_normal_form_test(void)
 {
-	std::cout << "Testing eval_formula:\n"
+	std::cout << "Testing negation_normal_form:\n"
 			<< "\tpress enter to keep testing this module, n to move to the next one\n";
 
-	bool result;
+	std::string result;
 	std::string formula;
 	auto tester = [&](void) -> void
 	{
 		formula = get_formula();
-		result = eval_formula(formula);
-		std::cout << "Formula '" << formula << "' eval to: " << result << "\n";
+		result = negation_normal_form(formula);
+		std::cout << "Formula '" << formula << "' become: '" << result << "'\n";
 	};
 
 	for (std::string input; input != "n" && std::cin.fail() == false;)

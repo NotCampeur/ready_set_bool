@@ -6,7 +6,7 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/08 15:06:42 by ldutriez          #+#    #+#              #
-#    Updated: 2023/02/16 16:57:13 by ldutriez         ###   ########.fr        #
+#    Updated: 2023/02/16 17:56:40 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ GRAY_CODE_SRC = gray_code.cpp gray_code_tests.cpp
 TREE_PRINTER_SRC = ast_printer.cpp
 EVAL_FORMULA_SRC = eval_formula.cpp eval_formula_tests.cpp
 TRUTH_TABLE_SRC = truth_table.cpp truth_table_tests.cpp
+NEGATION_NORMAL_FORM_SRC = negation_normal_form.cpp negation_normal_form_tests.cpp
 
 SRCS = main.cpp \
 		$(ADDER_SRC) \
@@ -61,7 +62,8 @@ SRCS = main.cpp \
 		$(GRAY_CODE_SRC) \
 		$(TREE_PRINTER_SRC) \
 		$(EVAL_FORMULA_SRC) \
-		$(TRUTH_TABLE_SRC)
+		$(TRUTH_TABLE_SRC) \
+		$(NEGATION_NORMAL_FORM_SRC)
 
 OBJ_DIR = objs
 OBJS = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)
