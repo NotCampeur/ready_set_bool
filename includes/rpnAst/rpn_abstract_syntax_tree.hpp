@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/18 17:38:37 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/18 19:34:32 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,8 +247,6 @@ namespace rsb
 			{
 				if (n == nullptr)
 					return ;
-				_negation_normal_form(n->left);
-				_negation_normal_form(n->right);
 				if (n->data == '!')
 				{
 					if (n->left->data == '!')
@@ -278,6 +276,8 @@ namespace rsb
 							_negation_normal_form(n->right);
 					}
 				}
+				_negation_normal_form(n->left);
+				_negation_normal_form(n->right);
 			}
 
 			void _print_truth_table_header(const std::map<T, bool> &variables) const
