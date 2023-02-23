@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/23 14:01:03 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/23 14:06:53 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,10 +270,6 @@ namespace rsb
 						n->right->left = n->left->right;
 						n->right->left->parent = n->right;
 						n->left->right = nullptr;
-						if (n->left->left->data == '!')
-							_negation_normal_form(n->left);
-						if (n->right->left->data == '!')
-							_negation_normal_form(n->right);
 					}
 					else if (n->left->data == '>')
 					{
