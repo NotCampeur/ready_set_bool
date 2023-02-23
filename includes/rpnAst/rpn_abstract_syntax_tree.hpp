@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/22 16:05:42 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/23 14:01:03 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,6 +299,36 @@ namespace rsb
 					n->left->parent->left = n->left;
 					n->left = n->left->parent;
 					n->left->parent = n;
+				}
+				else if (n->data == '=')
+				{
+					node<T> *new_parent(new node<T>('|'));
+					
+					n->data = '&';
+					if (_root == n)
+						_root = new_parent;
+					else if (n->parent->left == n)
+						n->parent->left = new_parent;
+					else if (n->parent->right == n)
+						n->parent->right = new_parent;
+					new_parent->parent = n->parent;
+					new_parent->left = n;
+					n->parent = new_parent;
+					
+					new_parent->right = new node<T>('&');
+					new_parent->right->parent = new_parent;
+
+					new_parent->right->left = new node<T>('!');
+					new_parent->right->left->parent = new_parent->right;
+					new_parent->right->left->left = new node<T>(n->left->data);
+					new_parent->right->left->left->parent = new_parent->right->left;
+
+					new_parent->right->right = new node<T>('!');
+					new_parent->right->right->parent = new_parent->right;
+					new_parent->right->right->left = new node<T>(n->right->data);
+					new_parent->right->right->left->parent = new_parent->right->right;
+
+					n = new_parent;
 				}
 				_negation_normal_form(n->left);
 				_negation_normal_form(n->right);
