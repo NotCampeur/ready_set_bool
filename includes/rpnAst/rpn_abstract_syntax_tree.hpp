@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/23 15:45:15 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:52:06 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,92 +243,115 @@ namespace rsb
 
 		private:
 
+			int _nnf_negation_case(node<T> ** n)
+			{
+				if ((*n)->left->data == '!')
+				{
+					node<T> *tmp((*n)->left->left);
+					(*n)->left->left = nullptr;
+					tmp->parent = (*n)->parent;
+					if (_root == *n)
+						_root = tmp;
+					else if ((*n)->parent->left == *n)
+						(*n)->parent->left = tmp;
+					else if ((*n)->parent->right == *n)
+						(*n)->parent->right = tmp;
+					delete *n;
+					*n = tmp;
+				}
+				else if ((*n)->left->data == '&' || (*n)->left->data == '|')
+				{
+					(*n)->data = ((*n)->left->data == '&') ? '|' : '&';
+					(*n)->left->data = '!';
+					(*n)->right = new node<T>('!');
+					(*n)->right->parent = *n;
+					(*n)->right->left = (*n)->left->right;
+					(*n)->right->left->parent = (*n)->right;
+					(*n)->left->right = nullptr;
+				}
+				else if ((*n)->left->data == '>' || (*n)->left->data == '=' ||
+						(*n)->left->data == '^')
+				{
+					_negation_normal_form((*n)->left);
+					_negation_normal_form(*n);
+					return 1;
+				}
+				return 0;
+			}
+
+			void _nnf_material_condition_case(node<T> * n)
+			{
+				n->data = '|';
+				n->left->parent = new node<T>('!');
+				n->left->parent->left = n->left;
+				n->left = n->left->parent;
+				n->left->parent = n;
+			}
+
+			void _nnf_equivalence_case(node<T> ** n)
+			{
+				node<T> *new_parent(new node<T>('|'));
+				
+				(*n)->data = '&';
+				if (_root == *n)
+					_root = new_parent;
+				else if ((*n)->parent->left == *n)
+					(*n)->parent->left = new_parent;
+				else if ((*n)->parent->right == *n)
+					(*n)->parent->right = new_parent;
+				new_parent->parent = (*n)->parent;
+				new_parent->left = *n;
+				(*n)->parent = new_parent;
+				
+				new_parent->right = new node<T>('&');
+				new_parent->right->parent = new_parent;
+
+				new_parent->right->left = new node<T>('!');
+				new_parent->right->left->parent = new_parent->right;
+				new_parent->right->left->left = (*n)->left->clone();
+				new_parent->right->left->left->parent = new_parent->right->left;
+
+				new_parent->right->right = new node<T>('!');
+				new_parent->right->right->parent = new_parent->right;
+				new_parent->right->right->left = (*n)->right->clone();
+				new_parent->right->right->left->parent = new_parent->right->right;
+
+				*n = new_parent;
+			}
+
+			void _nnf_exclusive_disjunction_case(node<T> * n)
+			{
+				n->data = '!';
+				n->left->parent = new node<T>('=');
+				n->left->parent->left = n->left;
+				n->left = n->left->parent;
+				n->left->parent = n;
+				n->left->right = n->right;
+				n->right->parent = n->left;
+				n->right = nullptr;
+				_negation_normal_form(n);
+			}
+
 			void _negation_normal_form(node<T> * n)
 			{
 				if (n == nullptr)
 					return ;
 				if (n->data == '!')
 				{
-					if (n->left->data == '!')
-					{
-						node<T> *tmp(n->left->left);
-						n->left->left = nullptr;
-						if (_root == n)
-							_root = tmp;
-						else if (n->parent->left == n)
-							n->parent->left = tmp;
-						else if (n->parent->right == n)
-							n->parent->right = tmp;
-						delete n;
-						n = tmp;
-					}
-					else if (n->left->data == '&' || n->left->data == '|')
-					{
-						n->data = (n->left->data == '&') ? '|' : '&';
-						n->left->data = '!';
-						n->right = new node<T>('!');
-						n->right->parent = n;
-						n->right->left = n->left->right;
-						n->right->left->parent = n->right;
-						n->left->right = nullptr;
-					}
-					else if (n->left->data == '>' || n->left->data == '=' ||
-							n->left->data == '^')
-					{
-						_negation_normal_form(n->left);
-						_negation_normal_form(n);
+					if (_nnf_negation_case(&n) == 1)
 						return ;
-					}
 				}
 				else if (n->data == '>')
 				{
-					n->data = '|';
-					n->left->parent = new node<T>('!');
-					n->left->parent->left = n->left;
-					n->left = n->left->parent;
-					n->left->parent = n;
+					_nnf_material_condition_case(n);
 				}
 				else if (n->data == '=')
 				{
-					node<T> *new_parent(new node<T>('|'));
-					
-					n->data = '&';
-					if (_root == n)
-						_root = new_parent;
-					else if (n->parent->left == n)
-						n->parent->left = new_parent;
-					else if (n->parent->right == n)
-						n->parent->right = new_parent;
-					new_parent->parent = n->parent;
-					new_parent->left = n;
-					n->parent = new_parent;
-					
-					new_parent->right = new node<T>('&');
-					new_parent->right->parent = new_parent;
-
-					new_parent->right->left = new node<T>('!');
-					new_parent->right->left->parent = new_parent->right;
-					new_parent->right->left->left = new node<T>(n->left->data);
-					new_parent->right->left->left->parent = new_parent->right->left;
-
-					new_parent->right->right = new node<T>('!');
-					new_parent->right->right->parent = new_parent->right;
-					new_parent->right->right->left = new node<T>(n->right->data);
-					new_parent->right->right->left->parent = new_parent->right->right;
-
-					n = new_parent;
+					_nnf_equivalence_case(&n);
 				}
 				else if(n->data == '^')
 				{
-					n->data = '!';
-					n->left->parent = new node<T>('=');
-					n->left->parent->left = n->left;
-					n->left = n->left->parent;
-					n->left->parent = n;
-					n->left->right = n->right;
-					n->right->parent = n->left;
-					n->right = nullptr;
-					_negation_normal_form(n);
+					_nnf_exclusive_disjunction_case(n);
 					return ;
 				}
 				_negation_normal_form(n->left);
