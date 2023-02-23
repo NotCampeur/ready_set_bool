@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/23 14:06:53 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/23 14:24:49 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,6 +267,7 @@ namespace rsb
 						n->data = (n->left->data == '&') ? '|' : '&';
 						n->left->data = '!';
 						n->right = new node<T>('!');
+						n->right->parent = n;
 						n->right->left = n->left->right;
 						n->right->left->parent = n->right;
 						n->left->right = nullptr;
