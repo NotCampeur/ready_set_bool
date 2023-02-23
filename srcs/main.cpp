@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:06:44 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/18 19:30:08 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/23 13:54:16 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ void tests_index(void)
 		eval_formula_test, print_truth_table_test,
 		negation_normal_form_test};
 	std::cout << "Choose a module to test:\n"
-			<< "\t0: adder\n"
-			<< "\t1: multiplier\n"
-			<< "\t2: gray_code\n"
-			<< "\t3: ast_printer\n"
-			<< "\t4: eval_formula\n"
-			<< "\t5: print_truth_table\n"
-			<< "\t6: negation_normal_form\n"
+			<< "\t0: adder"
+			<< "\t1: multiplier"
+			<< "\t\t2: gray_code"
+			<< "\t\t3: ast_printer\n"
+			<< "\t4: eval_formula"
+			<< "\t5: print_truth_table"
+			<< "\t6: negation_normal_form"
 			<< "\t7: exit\n";
 	int input;
 	std::cin >> input;
