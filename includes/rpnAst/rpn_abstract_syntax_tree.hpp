@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/23 19:52:06 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/25 18:36:23 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -336,23 +336,23 @@ namespace rsb
 			{
 				if (n == nullptr)
 					return ;
-				if (n->data == '!')
+				switch (n->data)
 				{
-					if (_nnf_negation_case(&n) == 1)
-						return ;
-				}
-				else if (n->data == '>')
-				{
-					_nnf_material_condition_case(n);
-				}
-				else if (n->data == '=')
-				{
-					_nnf_equivalence_case(&n);
-				}
-				else if(n->data == '^')
-				{
-					_nnf_exclusive_disjunction_case(n);
-					return ;
+					case '!':
+						if (_nnf_negation_case(&n) == 1)
+							return ;
+						break;
+					case '>':
+						_nnf_material_condition_case(n);
+						break;
+					case '=':
+						_nnf_equivalence_case(&n);
+						break;
+					case '^':
+						_nnf_exclusive_disjunction_case(n);
+						return;
+					default:
+						break;
 				}
 				_negation_normal_form(n->left);
 				_negation_normal_form(n->right);
