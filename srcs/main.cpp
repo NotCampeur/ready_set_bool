@@ -6,85 +6,100 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:06:44 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/23 13:54:16 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/02/26 16:05:52 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ready_set_bool.hpp"
+#include <vector>
+#include <utility>
+#include <iomanip>
 
-std::string get_formula(void)
+using namespace std;
+
+string get_formula(void)
 {
-	std::string formula;
-	std::cout << "Enter a formula: ";
-	std::getline(std::cin, formula);
+	string formula;
+	cout << "Enter a formula: ";
+	getline(cin, formula);
 	return formula;
+}
+
+void exit_program(void)
+{
+	cout << "Bye!\n";
+	exit(EXIT_SUCCESS);
 }
 
 void seed_selection(void)
 {
-	std::string input;
+	string input;
 	__UINT32_TYPE__ seed(0);
 	
-	std::cout << "Enter a seed if you want to use a specific seed, or just press enter to use the current time as seed: ";
-	std::getline(std::cin, input);
+	cout << "Enter a seed if you want to use a specific seed, or just press enter to use the current time as seed: ";
+	getline(cin, input);
 	try
 	{
-		seed = std::stoul(input);
+		seed = stoul(input);
 	}
 	catch(...)
 	{
 		input.clear();
 	}
 	
-	if (std::cin.fail() || input.empty() || input == "\n")
+	if (cin.fail() || input.empty() || input == "\n")
 		srand(time(NULL));
 	else
 		srand(seed);
-	std::cin.clear();
+	cin.clear();
 }
 
 void tests_index(void)
 {
-	static void (*test_function[])(void) = {
-		adder_test, multiplier_test,
-		gray_code_test, ast_printer,
-		eval_formula_test, print_truth_table_test,
-		negation_normal_form_test};
-	std::cout << "Choose a module to test:\n"
-			<< "\t0: adder"
-			<< "\t1: multiplier"
-			<< "\t\t2: gray_code"
-			<< "\t\t3: ast_printer\n"
-			<< "\t4: eval_formula"
-			<< "\t5: print_truth_table"
-			<< "\t6: negation_normal_form"
-			<< "\t7: exit\n";
-	int input;
-	std::cin >> input;
-	if (std::cin.eof())
-		return;
-	if (std::cin.fail() || input < 0 || input > 7)
+	static vector<pair<string, void (*)(void)> > test_function = {
+		make_pair("adder", adder_test),
+		make_pair("multiplier", multiplier_test),
+		make_pair("gray code", gray_code_test),
+		make_pair("ast printer", ast_printer),
+		make_pair("eval formula", eval_formula_test),
+		make_pair("print truth table", print_truth_table_test),
+		make_pair("NNF", negation_normal_form_test),
+		make_pair("CNF", conjunctive_normal_form_test),
+		make_pair("exit", exit_program)};
+
+	cout << setw(20) << "Choose a module to test:\n";
+	for (unsigned long i(1); i < test_function.size() + 1; i++)
 	{
-		std::cout << "Invalid input\n";
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		if ((i - 1) % 4 != 0)
+			cout << setw(20);
+		cout << i - 1 << ": " << test_function[i - 1].first;
+		if (i % 4 == 0 || i == test_function.size())
+			std::cout << "\n";
+	}
+	unsigned long input(0);
+	cin >> input;
+	if (cin.eof())
+		return;
+	if (cin.fail() || input > test_function.size() - 1)
+	{
+		cout << "Invalid input\n";
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		tests_index();
 	}
-	else if (input == 7)
-		return;
 	else
 	{
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		((void (*)(void))test_function[input])();
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		((void (*)(void))test_function[input].second)();
 		tests_index();
 	}
 }
 
 int main()
 {
-	std::cout << "Welcome in RSB!\n\n";
+	cout << "Welcome in RSB!\n\n";
 	seed_selection();
 	tests_index();
-	return EXIT_SUCCESS;
+	return EXIT_FAILURE;
 }
