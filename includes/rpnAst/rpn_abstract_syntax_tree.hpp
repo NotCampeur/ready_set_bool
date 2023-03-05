@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/05 18:25:57 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:29:41 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,9 +258,9 @@ namespace rsb
 			{
 				if (n == nullptr)
 					return;
-				if (n->data == '|')
+				if (n->data == '|' || n->data == '&')
 				{
-					if (n->left->data == '|')
+					if (n->left->data == n->data)
 					{
 						node<T> *tmp(n->left->right);
 						n->left->right = nullptr;
