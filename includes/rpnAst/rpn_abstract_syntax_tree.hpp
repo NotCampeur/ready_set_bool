@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/05 21:21:19 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/05 22:28:08 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,6 +300,7 @@ namespace rsb
 					n->left->left = tmp;
 					tmp->parent = n->left;
 					n->left->right = n->right->right->clone();
+					n->left->right->parent = n->left;
 				}
 				else if (n->data == '|' && n->right->data == '&')
 				{
@@ -324,8 +325,8 @@ namespace rsb
 					n->right->right = tmp;
 					tmp->parent = n->right;
 					n->right->left = n->left->left->clone();
+					n->right->left->parent = n->right;
 				}
-
 				_conjunctive_normal_form(n->left);
 				_conjunctive_normal_form(n->right);
 			}
