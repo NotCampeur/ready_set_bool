@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/25 18:36:23 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/05 16:30:16 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,12 +236,53 @@ namespace rsb
 				_negation_normal_form(_root);
 			}
 
+			// Format the tree to only have !, & and | operators,
+			// simplify negation and distribute conjunction and disjunction.
+			// AB&!C!| => A!B!|C!| => A!B!C!||
+			void conjunctive_normal_form(void)
+			{
+				if (_root == nullptr)
+					return;
+				_negation_normal_form(_root);
+				_conjunctive_normal_form(_root);
+			}
+
 			void print()
 			{
 				_print(_root);
 			}
 
 		private:
+
+			void _conjunctive_normal_form(node<T> *n)
+			{
+				if (n == nullptr)
+					return;
+				if (n->data == '|')
+				{
+					if (n->left->data == '|')
+					{
+						node<T> *tmp(n->left->right);
+						n->left->right = nullptr;
+						tmp->parent = n;
+						n->left->parent = n->parent;
+						if (_root == n)
+							_root = n->left;
+						else if (n->parent->left == n)
+							n->parent->left = n->left;
+						else if (n->parent->right == n)
+							n->parent->right = n->left;
+						n->parent = n->left;
+						n->left->right = n;
+						n->left = tmp;
+						tmp->parent = n;
+						n = n->parent;
+					}
+				}
+
+				_conjunctive_normal_form(n->left);
+				_conjunctive_normal_form(n->right);
+			}
 
 			int _nnf_negation_case(node<T> ** n)
 			{
