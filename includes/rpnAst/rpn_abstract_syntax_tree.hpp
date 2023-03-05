@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/05 18:29:41 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/05 19:52:12 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -278,6 +278,30 @@ namespace rsb
 						tmp->parent = n;
 						n = n->parent;
 						_conjunctive_normal_form(n);
+					}
+					else if (n->data == '|' && n->left->data == '&')
+					{
+						node<T> *tmp(n->left->right);
+						n->left->right = nullptr;
+						tmp->parent = n;
+						n->left->parent = n->parent;
+						if (_root == n)
+							_root = n->left;
+						else if (n->parent->left == n)
+							n->parent->left = n->left;
+						else if (n->parent->right == n)
+							n->parent->right = n->left;
+						n->parent = n->left;
+						n->left->right = n;
+						n->left = tmp;
+						tmp->parent = n;
+						n = n->parent;
+						tmp = n->left;
+						n->left = new node<T>('|');
+						n->left->parent = n;
+						n->left->left = tmp;
+						tmp->parent = n->left;
+						n->left->right = n->right->right->clone();
 					}
 				}
 
