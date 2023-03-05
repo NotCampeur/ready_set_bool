@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/05 16:30:16 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/05 17:04:21 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -415,13 +415,13 @@ namespace rsb
 				if (n == nullptr)
 					return ;
 				++indent;
-				_print(n->left);
+				_print(n->right);
 				for (int i = 0; i < indent - 1; i++)
 					std::cout << "  ";
 				if (indent > 0)
 					std::cout << "--";
 				std::cout << n->data << std::endl;
-				_print(n->right);
+				_print(n->left);
 				--indent;
 			}
 			
