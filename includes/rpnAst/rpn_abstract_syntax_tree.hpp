@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/05 19:52:12 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/05 21:21:19 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,51 +258,72 @@ namespace rsb
 			{
 				if (n == nullptr)
 					return;
-				if (n->data == '|' || n->data == '&')
+				if ((n->data == '|' || n->data == '&')
+					&& n->left->data == n->data)
 				{
-					if (n->left->data == n->data)
-					{
-						node<T> *tmp(n->left->right);
-						n->left->right = nullptr;
-						tmp->parent = n;
-						n->left->parent = n->parent;
-						if (_root == n)
-							_root = n->left;
-						else if (n->parent->left == n)
-							n->parent->left = n->left;
-						else if (n->parent->right == n)
-							n->parent->right = n->left;
-						n->parent = n->left;
-						n->left->right = n;
-						n->left = tmp;
-						tmp->parent = n;
-						n = n->parent;
-						_conjunctive_normal_form(n);
-					}
-					else if (n->data == '|' && n->left->data == '&')
-					{
-						node<T> *tmp(n->left->right);
-						n->left->right = nullptr;
-						tmp->parent = n;
-						n->left->parent = n->parent;
-						if (_root == n)
-							_root = n->left;
-						else if (n->parent->left == n)
-							n->parent->left = n->left;
-						else if (n->parent->right == n)
-							n->parent->right = n->left;
-						n->parent = n->left;
-						n->left->right = n;
-						n->left = tmp;
-						tmp->parent = n;
-						n = n->parent;
-						tmp = n->left;
-						n->left = new node<T>('|');
-						n->left->parent = n;
-						n->left->left = tmp;
-						tmp->parent = n->left;
-						n->left->right = n->right->right->clone();
-					}
+					node<T> *tmp(n->left->right);
+					n->left->right = nullptr;
+					tmp->parent = n;
+					n->left->parent = n->parent;
+					if (_root == n)
+						_root = n->left;
+					else if (n->parent->left == n)
+						n->parent->left = n->left;
+					else if (n->parent->right == n)
+						n->parent->right = n->left;
+					n->parent = n->left;
+					n->left->right = n;
+					n->left = tmp;
+					tmp->parent = n;
+					n = n->parent;
+					_conjunctive_normal_form(n);
+				}
+				else if (n->data == '|' && n->left->data == '&')
+				{
+					node<T> *tmp(n->left->right);
+					n->left->right = nullptr;
+					n->left->parent = n->parent;
+					if (_root == n)
+						_root = n->left;
+					else if (n->parent->left == n)
+						n->parent->left = n->left;
+					else if (n->parent->right == n)
+						n->parent->right = n->left;
+					n->parent = n->left;
+					n->left->right = n;
+					n->left = tmp;
+					tmp->parent = n;
+					n = n->parent;
+					tmp = n->left;
+					n->left = new node<T>('|');
+					n->left->parent = n;
+					n->left->left = tmp;
+					tmp->parent = n->left;
+					n->left->right = n->right->right->clone();
+				}
+				else if (n->data == '|' && n->right->data == '&')
+				{
+					node<T> *tmp(n->right->left);
+
+					n->right->left = nullptr;
+					n->right->parent = n->parent;
+					if (_root == n)
+						_root = n->right;
+					else if (n->parent->left == n)
+						n->parent->left = n->right;
+					else if (n->parent->right == n)
+						n->parent->right = n->right;
+					n->parent = n->right;
+					n->right->left = n;
+					n->right = tmp;
+					tmp->parent = n;
+					n = n->parent;
+					tmp = n->right;
+					n->right = new node<T>('|');
+					n->right->parent = n;
+					n->right->right = tmp;
+					tmp->parent = n->right;
+					n->right->left = n->left->left->clone();
 				}
 
 				_conjunctive_normal_form(n->left);
