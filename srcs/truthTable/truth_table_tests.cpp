@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 04:22:09 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/10 04:31:29 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/06 16:43:18 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void print_truth_table_test(void)
 {
-	std::cout << "Testing truth_table:\n"
-			<< "\tpress enter to keep testing this module, n to move to the next one\n";
+	std::cout << "Testing \033[1;37mtruth_table\033[0m:\n"
+			<< "\tpress \033[1;36menter\033[0m to keep testing this module, \033[1;36mn\033[0m to move to the next one\n";
 
 	auto get_formula = [&]() -> std::string
 	{

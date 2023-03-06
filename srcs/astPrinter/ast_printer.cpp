@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:53:22 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/18 17:45:35 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/06 16:44:10 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void ast_printer(void)
 {
-	std::cout << "Visualizing the AST:\n"
-			<< "\tpress enter to keep testing this module, n to move to the next one\n";
+	std::cout << "\033[1;37mVisualizing the AST\033[0m:\n"
+			<< "\tpress \033[1;36menter\033[0m to keep testing this module, \033[1;36mn\033[0m to move to the next one\n";
 
 	rsb::rpn_abstract_syntax_tree<char, rsb::variable_boolean_token_check> tree;
 	std::string formula;

@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:06:44 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/06 16:14:51 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/06 16:47:13 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ using namespace std;
 string get_formula(void)
 {
 	string formula;
-	cout << "Enter a formula: ";
+	cout << "Enter a \033[1;36mformula\033[0m: ";
 	getline(cin, formula);
 	return formula;
 }
 
 void exit_program(void)
 {
-	cout << "Bye!\n";
+	cout << "\033[1;37mBye!\033[0m\n";
 	exit(EXIT_SUCCESS);
 }
 
@@ -36,7 +36,8 @@ void seed_selection(void)
 	string input;
 	__UINT32_TYPE__ seed(0);
 	
-	cout << "Enter a seed if you want to use a specific seed, or just press enter to use the current time as seed: ";
+	cout << "\033[1;36mEnter a seed\033[0m if you want to use a specific seed,"
+		<< " or \033[1;36mjust press enter\033[0m to use the current time as seed: ";
 	getline(cin, input);
 	try
 	{
@@ -72,12 +73,12 @@ void tests_index(void)
 		make_pair("SAT", sat_test),
 		make_pair("exit", exit_program)};
 
-	cout << setw(20) << "Choose a module to test:\n";
+	cout << "Choose a module to test:\n";
 	for (unsigned long i(1); i < test_function.size() + 1; i++)
 	{
 		if ((i - 1) % 4 != 0)
-			cout << setw(20);
-		cout << i - 1 << ": " << test_function[i - 1].first;
+			cout << '\t';
+		cout << "\033[4;32m" << i - 1 << "\033[0m: " << test_function[i - 1].first;
 		if (i % 4 == 0 || i == test_function.size())
 			std::cout << "\n";
 	}
@@ -87,7 +88,7 @@ void tests_index(void)
 		return;
 	if (cin.fail() || input > test_function.size() - 1)
 	{
-		cout << "Invalid input\n";
+		cout << "\033[0;31mInvalid input\033[0m\n";
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		tests_index();
@@ -103,7 +104,7 @@ void tests_index(void)
 
 int main()
 {
-	cout << "Welcome in RSB!\n\n";
+	cout << "\033[1;37mWelcome in RSB!\033[0m\n\n";
 	seed_selection();
 	tests_index();
 	return EXIT_FAILURE;

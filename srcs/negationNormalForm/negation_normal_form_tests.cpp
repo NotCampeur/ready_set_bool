@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:53:24 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/18 17:45:45 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/06 16:43:18 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void negation_normal_form_test(void)
 {
-	std::cout << "Testing negation_normal_form:\n"
-			<< "\tpress enter to keep testing this module, n to move to the next one\n";
+	std::cout << "Testing \033[1;37mnegation_normal_form\033[0m:\n"
+			<< "\tpress \033[1;36menter\033[0m to keep testing this module, \033[1;36mn\033[0m to move to the next one\n";
 
 	std::string result;
 	std::string formula;

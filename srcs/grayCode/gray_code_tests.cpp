@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:23:08 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/09 15:27:36 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/06 16:43:18 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void gray_code_test(void)
 {
-	std::cout << "Testing gray_code:\n"
-			<< "\tpress enter to keep testing this module, n to move to the next one\n";
+	std::cout << "Testing \033[1;37mgray_code\033[0m:\n"
+			<< "\tpress \033[1;36menter\033[0m to keep testing this module, \033[1;36mn\033[0m to move to the next one\n";
 
 	__UINT32_TYPE__ a, result;
 	auto tester = [&](void) -> void
