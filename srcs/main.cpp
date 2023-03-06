@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:06:44 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/06 16:12:16 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/06 16:14:51 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,11 @@ void seed_selection(void)
 	}
 	
 	if (cin.fail() || input.empty() || input == "\n")
-		srand(time(NULL));
+	{
+		__UINT32_TYPE__ time_seed = time(NULL);
+		srand(time_seed);
+		std::cout << time_seed << "\n";
+	}
 	else
 		srand(seed);
 	cin.clear();
