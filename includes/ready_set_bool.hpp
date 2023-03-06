@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:56:02 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/06 15:49:51 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/06 19:07:56 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define READY_SET_BOOL_HPP
 
 # include <iostream>
+# include <vector>
 # include <limits>
 
 // ALGEBRA FUNCTIONS
@@ -26,6 +27,7 @@ void print_truth_table(const std::string &formula);
 std::string negation_normal_form(const std::string &formula);
 std::string conjunctive_normal_form(const std::string &formula);
 bool sat(std::string & formula);
+std::vector<std::vector<__INT32_TYPE__> > powerset(std::vector<__INT32_TYPE__> set);
 
 // TESTING FUNCTIONS
 
@@ -39,5 +41,6 @@ void print_truth_table_test(void);
 void negation_normal_form_test(void);
 void conjunctive_normal_form_test(void);
 void sat_test(void);
+void powerset_test(void);
 
 #endif
