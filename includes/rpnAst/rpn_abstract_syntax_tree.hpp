@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/05 22:41:26 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/06 16:54:14 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,50 @@ namespace rsb
 					result = evaluation_tree.evaluate();
 					std::cout << "| " << result << " |\n";
 				}
+			}
+
+			bool is_satisfiable(void)
+			{
+				if (std::is_same<token_checker, rsb::variable_boolean_token_check>::value == false)
+					throw std::runtime_error("Wrong token checker");
+				if (_root == nullptr)
+					return false;
+
+				rsb::rpn_abstract_syntax_tree<T, rsb::boolean_token_check> evaluation_tree;
+				std::map<char, bool> variables;
+				bool result(false);
+				size_t max_variations(0);
+				std::string current_formula(formula());
+				std::string formula_variation;
+				
+				for (char var : current_formula)
+					if (_checker.is_variable(var) == true)
+						variables[var] = false;
+				max_variations = 1 << variables.size();
+				for (size_t i(0); i < max_variations; ++i)
+				{
+					formula_variation = current_formula;
+					for (typename std::map<char, bool>::iterator it(variables.begin());
+						it != variables.end(); ++it)
+					{
+						it->second = (i & (1 << (std::distance(it, variables.end()) - 1))) != 0;
+						std::replace(formula_variation.begin(), formula_variation.end(),
+							it->first, it->second == true ? '1' : '0');
+					}
+					try
+					{
+						evaluation_tree.build(std::vector<char>(formula_variation.begin(), formula_variation.end()));
+					}
+					catch(const std::exception& e)
+					{
+						std::cerr << e.what() << '\n';
+						return false;
+					}
+					result = evaluation_tree.evaluate();
+					if (result == true)
+						return true;
+				}
+				return false;
 			}
 
 			// A boolean evaluator function

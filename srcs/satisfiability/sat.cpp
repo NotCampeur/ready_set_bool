@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 15:46:54 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/06 16:03:38 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/06 16:56:50 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,18 @@
 
 bool sat(std::string & formula)
 {
-	bool result(false);
+	rsb::rpn_abstract_syntax_tree<char, rsb::variable_boolean_token_check> ast;
 
 	if (formula.empty() == true)
-		return result;
-	return result;
+		return false;
+	try
+	{
+		ast.build(std::vector<char>(formula.begin(), formula.end()));
+		return ast.is_satisfiable();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	return false;
 }
