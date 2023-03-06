@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:56:02 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/26 14:58:19 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/06 15:49:51 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ bool eval_formula(const std::string &formula);
 void print_truth_table(const std::string &formula);
 std::string negation_normal_form(const std::string &formula);
 std::string conjunctive_normal_form(const std::string &formula);
+bool sat(std::string & formula);
 
 // TESTING FUNCTIONS
 
@@ -37,5 +38,6 @@ void eval_formula_test(void);
 void print_truth_table_test(void);
 void negation_normal_form_test(void);
 void conjunctive_normal_form_test(void);
+void sat_test(void);
 
 #endif
