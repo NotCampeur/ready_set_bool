@@ -6,7 +6,7 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/08 15:06:42 by ldutriez          #+#    #+#              #
-#    Updated: 2023/03/06 19:06:21 by ldutriez         ###   ########.fr        #
+#    Updated: 2023/03/08 15:47:53 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ NEGATION_NORMAL_FORM_SRC = negation_normal_form.cpp negation_normal_form_tests.c
 CONJUNCTIVE_NORMAL_FORM_SRC = conjunctive_normal_form.cpp conjunctive_normal_form_tests.cpp
 SATISFIABILITY_SRC = sat.cpp sat_tests.cpp
 POWERSET_SRC = powerset.cpp powerset_tests.cpp
+SET_EVALUATION_SRC = set_evaluation.cpp set_evaluation_tests.cpp
 
 SRCS = main.cpp \
 		$(ADDER_SRC) \
@@ -69,7 +70,8 @@ SRCS = main.cpp \
 		$(NEGATION_NORMAL_FORM_SRC) \
 		$(CONJUNCTIVE_NORMAL_FORM_SRC) \
 		$(SATISFIABILITY_SRC) \
-		$(POWERSET_SRC)
+		$(POWERSET_SRC) \
+		$(SET_EVALUATION_SRC)
 
 OBJ_DIR = objs
 OBJS = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)
