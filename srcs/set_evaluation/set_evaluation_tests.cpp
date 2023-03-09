@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:50:11 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/08 17:00:23 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/09 17:39:27 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void eval_set_test(void)
 	std::cout << "Testing \033[1;37meval_set\033[0m:\n"
 			<< "\tpress \033[1;36menter\033[0m to keep testing this module, \033[1;36mn\033[0m to move to the next one\n";
 	
-	std::vector<std::vector<__INT32_TYPE__> >	sets;
+	rsb::set<rsb::set<__INT32_TYPE__> >	sets;
 	std::string formula;
-	std::vector<__INT32_TYPE__>					result;
+	rsb::set<__INT32_TYPE__>					result;
 
 	auto get_sets = [&](void) -> void
 	{
@@ -33,7 +33,7 @@ void eval_set_test(void)
 		{
 			std::stringstream			ss(input);
 			__INT32_TYPE__				i;
-			std::vector<__INT32_TYPE__>	set;
+			rsb::set<__INT32_TYPE__>	set;
 
 			while (ss >> i)
 				set.push_back(i);
@@ -41,11 +41,11 @@ void eval_set_test(void)
 		}
 	};
 
-	auto stringify_set = [&](std::vector<__INT32_TYPE__> set) -> std::string
+	auto stringify_set = [&](rsb::set<__INT32_TYPE__> set) -> std::string
 	{
 		std::string					result;
 
-		for (std::vector<__INT32_TYPE__>::iterator it = set.begin(); it != set.end(); it++)
+		for (rsb::set<__INT32_TYPE__>::iterator it = set.begin(); it != set.end(); it++)
 		{
 			result += std::to_string(*it);
 			if (it + 1 != set.end())
@@ -58,7 +58,7 @@ void eval_set_test(void)
 	{
 		std::string					result;
 
-		for (std::vector<std::vector<__INT32_TYPE__> >::iterator it = sets.begin(); it != sets.end(); it++)
+		for (rsb::set<rsb::set<__INT32_TYPE__> >::iterator it = sets.begin(); it != sets.end(); it++)
 		{
 			result += "{";
 			result += stringify_set(*it);

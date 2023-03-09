@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:56:02 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/08 16:07:44 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/09 17:38:56 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <iostream>
 # include <vector>
 # include <limits>
+# include "math_set.hpp"
 
 // ALGEBRA FUNCTIONS
 
@@ -27,9 +28,9 @@ void print_truth_table(const std::string &formula);
 std::string negation_normal_form(const std::string &formula);
 std::string conjunctive_normal_form(const std::string &formula);
 bool sat(std::string & formula);
-std::vector<std::vector<__INT32_TYPE__> > powerset(std::vector<__INT32_TYPE__> set);
-std::vector<__INT32_TYPE__> eval_set(std::string &formula,
-								std::vector<std::vector<__INT32_TYPE__> > &sets);
+rsb::set<rsb::set<__INT32_TYPE__> > powerset(rsb::set<__INT32_TYPE__> set);
+rsb::set<__INT32_TYPE__> eval_set(std::string &formula,
+								rsb::set<rsb::set<__INT32_TYPE__> > &sets);
 
 // TESTING FUNCTIONS
 

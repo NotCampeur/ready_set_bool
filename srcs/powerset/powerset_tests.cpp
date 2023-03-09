@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 19:04:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/06 19:15:18 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/09 16:48:35 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void powerset_test(void)
 	std::cout << "Testing \033[1;37mpowerset\033[0m:\n"
 			<< "\tpress \033[1;36menter\033[0m to keep testing this module, \033[1;36mn\033[0m to move to the next one\n";
 	
-	std::vector<__INT32_TYPE__>	set;
-	std::vector<std::vector<__INT32_TYPE__> >	powerset_result;
+	rsb::set<__INT32_TYPE__>	set;
+	rsb::set<rsb::set<__INT32_TYPE__> >	powerset_result;
 
 	auto get_set = [&](void) -> void
 	{
@@ -35,11 +35,11 @@ void powerset_test(void)
 			set.push_back(i);
 	};
 
-	auto stringify_set = [&](std::vector<__INT32_TYPE__> set) -> std::string
+	auto stringify_set = [&](rsb::set<__INT32_TYPE__> set) -> std::string
 	{
 		std::string					result;
 
-		for (std::vector<__INT32_TYPE__>::iterator it = set.begin(); it != set.end(); it++)
+		for (rsb::set<__INT32_TYPE__>::iterator it = set.begin(); it != set.end(); it++)
 		{
 			result += std::to_string(*it);
 			if (it + 1 != set.end())
@@ -48,11 +48,11 @@ void powerset_test(void)
 		return (result);
 	};
 
-	auto stringify_powerset = [&](std::vector<std::vector<__INT32_TYPE__> > powerset) -> std::string
+	auto stringify_powerset = [&](rsb::set<rsb::set<__INT32_TYPE__> > powerset) -> std::string
 	{
 		std::string					result;
 
-		for (std::vector<std::vector<__INT32_TYPE__> >::iterator it = powerset.begin(); it != powerset.end(); it++)
+		for (rsb::set<rsb::set<__INT32_TYPE__> >::iterator it = powerset.begin(); it != powerset.end(); it++)
 		{
 			result += "{";
 			result += stringify_set(*it);
