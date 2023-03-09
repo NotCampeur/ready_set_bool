@@ -1,2 +1,3 @@
 RSB
 objs/*.o
+logs/*
