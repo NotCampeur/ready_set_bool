@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/06 16:54:14 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/10 05:43:42 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,14 @@ namespace rsb
 					}
 					else if (_checker.is_operator(token) == true)
 					{
-						if ((stack.size() < 2 && token != '!') ||
-							(stack.size() < 1 && token == '!'))
+						if ((stack.size() < 2 && _checker.is_negation(token) == false) ||
+							(stack.size() < 1 && _checker.is_negation(token) == true))
 						{
 							for (node<T> * node : stack)
 								delete node;
 							throw std::invalid_argument("Invalid formula");
 						}
-						if (token == '!' && stack.size() > 0)
+						if (_checker.is_negation(token) == true && stack.size() > 0)
 						{
 							node<T>		*left = stack.back();
 							stack.pop_back();
@@ -522,5 +522,12 @@ namespace rsb
 			token_checker	_checker;
 	};
 };
+
+template<typename U, typename V>
+std::ostream &operator<<(std::ostream &os, const std::pair<U, V> &pair)
+{
+	os << pair.first;
+	return os;
+}
 
 #endif
