@@ -6,7 +6,7 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/08 15:06:42 by ldutriez          #+#    #+#              #
-#    Updated: 2023/03/09 20:22:24 by ldutriez         ###   ########.fr        #
+#    Updated: 2023/03/10 05:23:05 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -119,7 +119,7 @@ $(OBJ_DIR)/%.o : %.cpp | $(OBJ_DIR)
 	@if [ $(ret_status) -eq 0 ]; then \
 		printf "$(_GREEN)Done$(_WHITE)\r"; \
 	else \
-		printf "$(_RED)Failed$(_WHITE)\r"; \
+		printf "$(_RED)Failed$(_WHITE)\n"; \
 		exit $(ret_status); \
 	fi
 
