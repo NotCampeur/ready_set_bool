@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:14:42 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/10 07:56:12 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/10 21:36:01 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ namespace rsb
 
 			bool is_value(const std::pair<char, rsb::set<__INT32_TYPE__> > & token) const
 			{
-				return (variable_boolean_token_check::is_value(token.first));
+				return (token.first >= 'A' && token.first <= 'Z');
 			}
 			bool is_variable(const std::pair<char, rsb::set<__INT32_TYPE__> > & token) const
 			{
