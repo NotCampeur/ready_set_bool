@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:39:06 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/10 21:53:38 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/10 22:05:40 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ rsb::set<__INT32_TYPE__> eval_set(std::string &formula,
 	{
 		for (char c: formula)
 		{
-			if (isalpha(c) != 0)
+			if (isupper(c) != 0)
 				build_data.push_back(std::make_pair(c, sets.at(c - 'A')));
 			else
 				build_data.push_back(std::make_pair(c, rsb::set<__INT32_TYPE__>()));
