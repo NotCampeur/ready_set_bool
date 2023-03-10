@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:50:11 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/10 20:40:10 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/10 21:46:54 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ void eval_set_test(void)
 	auto get_sets = [&](void) -> void
 	{
 		std::string					input;
+		unsigned char				count(0);
 
 		sets.clear();
 		std::cout << "Enter \033[1;36msets of integers\033[0m separated by a new line: \n"
 		 << "each integer must be separated by a space: (empty line to stop)\n";
+		std::cout << "A = ";
 		while (std::getline(std::cin, input) && input != "")
 		{
 			std::stringstream			ss(input);
@@ -36,8 +38,12 @@ void eval_set_test(void)
 			rsb::set<__INT32_TYPE__>	set;
 
 			while (ss >> i)
+			{
 				set.push_back(i);
+			}
 			sets.push_back(set);
+			++count;
+			std::cout << static_cast<char>(count + 'A') << " = ";
 		}
 	};
 
