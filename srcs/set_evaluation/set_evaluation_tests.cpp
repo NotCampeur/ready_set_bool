@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:50:11 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/09 17:39:27 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/10 20:40:10 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,16 @@ void eval_set_test(void)
 	{
 		formula = get_formula();
 		get_sets();
-		result = eval_set(formula, sets);
-		std::cout << "formula :\n\t{" << formula << "}\nsets :\n\t {" << stringify_sets()
-			<< "}\nresulting set :\n\t{" << stringify_set(result) << "}\n";
+		try
+		{
+			result = eval_set(formula, sets);
+			std::cout << "formula :\n\t{" << formula << "}\nsets :\n\t {" << stringify_sets()
+				<< "}\nresulting set :\n\t{" << stringify_set(result) << "}\n";
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
 	};
 
 	for (std::string input; input != "n" && std::cin.fail() == false;)

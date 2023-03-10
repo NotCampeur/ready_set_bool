@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/10 05:43:42 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/10 21:04:46 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <algorithm> //? Use in print_truth_table for std::replace
 #include "rpn_ast_checkers.hpp"
 #include "rpn_ast_node.hpp"
+#include "math_set.hpp"
 
 namespace rsb
 {
@@ -88,14 +89,14 @@ namespace rsb
 					}
 					else if (_checker.is_operator(token) == true)
 					{
-						if ((stack.size() < 2 && _checker.is_negation(token) == false) ||
-							(stack.size() < 1 && _checker.is_negation(token) == true))
+						if ((stack.size() < 2 && _checker.is_same(token, '!') == false) ||
+							(stack.size() < 1 && _checker.is_same(token, '!') == true))
 						{
 							for (node<T> * node : stack)
 								delete node;
 							throw std::invalid_argument("Invalid formula");
 						}
-						if (_checker.is_negation(token) == true && stack.size() > 0)
+						if (_checker.is_same(token, '!') == true && stack.size() > 0)
 						{
 							node<T>		*left = stack.back();
 							stack.pop_back();
@@ -267,6 +268,50 @@ namespace rsb
 						result = !(left && !right);
 					else if (_root->data == '=')
 						result = left == right;
+				}
+				return result;
+			}
+
+			// An evaluate specialization for set_variable_boolean_token_check
+			// Used to evaluate a formula on sets.
+			// throw std::runtime_error if the tree is empty or malformed
+			// throw std::runtime_error if the token checker is not a set_variable_boolean_token_check
+			// throw std::runtime_error if T is not a pair
+			rsb::set<__INT32_TYPE__> set_evaluate(const rsb::set<__INT32_TYPE__> & encompassing_set) const
+			{
+				rsb::set<__INT32_TYPE__> result;
+
+				if (std::is_same<token_checker, rsb::set_variable_boolean_token_check>::value == false)
+					throw std::runtime_error("Wrong token checker");
+				if (std::is_same<T, std::pair<char, rsb::set<__INT32_TYPE__>>>::value == false)
+					throw std::runtime_error("Wrong type");
+				if (_root == nullptr)
+					throw std::runtime_error("Empty or malformed tree");
+				if (_checker.is_value(_root->data) == true)
+				{
+					return rsb::set<__INT32_TYPE__>(_root->data.second);
+				}
+				else if (_checker.is_operator(_root->data) == true)
+				{
+					rsb::set<__INT32_TYPE__> left(rpn_abstract_syntax_tree(_root->left).set_evaluate(encompassing_set));
+					rsb::set<__INT32_TYPE__> right;
+
+					if (_checker.is_same(_root->data, '!') == false)
+						right = rpn_abstract_syntax_tree(_root->right).set_evaluate(encompassing_set);
+					if (_checker.is_same(_root->data, '!') == true)
+						result = encompassing_set ^ left;
+					else if (_checker.is_same(_root->data, '&') == true)
+						result = left & right;
+					else if (_checker.is_same(_root->data, '|') == true)
+						result = left | right;
+					else if (_checker.is_same(_root->data, '^') == true)
+						result = left ^ right;
+					else if (_checker.is_same(_root->data, '>') == true) //!Not sure
+						result = encompassing_set ^ (left & (encompassing_set ^ right));
+					else if (_checker.is_same(_root->data, '=') == true)
+						result = (left & right) |
+							((encompassing_set ^ (left)) &
+							(encompassing_set ^ (right)));
 				}
 				return result;
 			}

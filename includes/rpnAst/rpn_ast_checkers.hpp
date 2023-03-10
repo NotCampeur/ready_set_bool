@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:14:42 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/10 05:39:04 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/10 07:56:12 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ namespace rsb
 	class boolean_token_check : public i_token_check
 	{
 		public:
-			bool is_negation(const char & c) const
+			bool is_same(const char c, const char goal) const
 			{
-				return (c == '!');
+				return (c == goal);
 			}
 			
 			bool is_operator(const char & c) const
@@ -80,9 +80,9 @@ namespace rsb
 	class set_variable_boolean_token_check : public variable_boolean_token_check
 	{
 		public:
-			bool is_negation(const std::pair<char, rsb::set<__INT32_TYPE__> > & token) const
+			bool is_same(const std::pair<char, rsb::set<__INT32_TYPE__> > & token, const char goal) const
 			{
-				return (variable_boolean_token_check::is_negation(token.first));
+				return (variable_boolean_token_check::is_same(token.first, goal));
 			}
 			
 			bool is_operator(const std::pair<char, rsb::set<__INT32_TYPE__> > & token) const

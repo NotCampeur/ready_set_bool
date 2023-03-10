@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:27:43 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/09 16:00:35 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/10 21:00:19 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,61 @@ namespace rsb
 
 			~set()
 			{}
+
+			set operator&(const set & src) const
+			{
+				set result;
+				
+				for (auto & elem : *this)
+					for (auto & elem2 : src)
+						if (elem == elem2)
+							result.push_back(elem);
+				return (result);
+			}
+
+			set operator|(const set & src) const
+			{
+				set result(src);
+				bool found(false);
+
+				for (auto & elem : *this)
+				{
+					found = false;
+					for (auto & elem2 : src)
+						if (elem == elem2)
+							found = true;
+					if (!found)
+						result.push_back(elem);
+				}
+				return (result);
+			}
+
+			set operator^(const set & src) const
+			{
+				set result;
+				bool found(false);
+
+				for (auto & elem : *this)
+				{
+					found = false;
+					for (auto & elem2 : src)
+						if (elem == elem2)
+							found = true;
+					if (!found)
+						result.push_back(elem);
+				}
+				for (auto & elem : src)
+				{
+					found = false;
+					for (auto & elem2 : *this)
+						if (elem == elem2)
+							found = true;
+					if (!found)
+						result.push_back(elem);
+				}
+				return (result);
+			}
 	};
-	
 }
 
 #endif
