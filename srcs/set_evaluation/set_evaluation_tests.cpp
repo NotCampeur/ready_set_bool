@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:50:11 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/10 21:46:54 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/10 22:01:20 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void eval_set_test(void)
 		unsigned char				count(0);
 
 		sets.clear();
-		std::cout << "Enter \033[1;36msets of integers\033[0m separated by a new line: \n"
-		 << "each integer must be separated by a space: (empty line to stop)\n";
+		std::cout << "Enter \033[1;36msets of integers\033[0m separated by a new line: (empty line to stop)\n"
+		 << "\teach integer must be separated by a space:\n";
 		std::cout << "A = ";
 		while (std::getline(std::cin, input) && input != "")
 		{
@@ -87,7 +87,7 @@ void eval_set_test(void)
 		}
 		catch(const std::exception& e)
 		{
-			std::cerr << e.what() << '\n';
+			std::cerr << "\033[0;31m" << e.what() << "\033[0m\n";
 		}
 	};
 
