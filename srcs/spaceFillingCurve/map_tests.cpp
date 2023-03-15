@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:40:46 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/15 20:42:04 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/15 20:58:40 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void map_test(void)
 	{
 		get_spatial_data(x, y);
 		result = map(x, y);
-		std::cout << "The reverse space filling curve of {x=" << x << ", y=" << y << "} is: " << result << "\n";
+		std::cout.precision(std::numeric_limits<double>::max_digits10);
+		std::cout << "The reverse space filling curve of {x=" << x << ", y=" << y << "} is: " << std::fixed << result << "\n";
 	};
 
 	for (std::string input; input != "n" && std::cin.fail() == false;)
