@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   adder.cpp                                          :+:      :+:    :+:   */
+/*   map.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 15:06:48 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/15 17:46:16 by ldutriez         ###   ########.fr       */
+/*   Created: 2023/03/15 16:45:52 by ldutriez          #+#    #+#             */
+/*   Updated: 2023/03/15 17:38:37 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cstdint>
+#include "ready_set_bool.hpp"
 
-uint32_t adder(uint32_t a, uint32_t b)
+double map(uint16_t x, uint16_t y)
 {
-	uint32_t result(0);
-	uint32_t tmp(0);
-	uint32_t carry(0);
-
-	for (uint32_t i(0); i < 32 ; ++i)
-	{
-		tmp = 1 << i;
-		result = result | ((a & tmp) ^ (b & tmp) ^ carry);
-		carry = ((a & tmp) & (b & tmp)) | ((a & tmp) & carry) | ((b & tmp) & carry);
-		carry = carry << 1;
-	}
-	return result;
+	(void)(x);
+	(void)(y);
+	return 0;
 }

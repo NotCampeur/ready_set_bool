@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:06:44 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/08 15:51:41 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/15 17:22:49 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void exit_program(void)
 void seed_selection(void)
 {
 	string input;
-	__UINT32_TYPE__ seed(0);
+	uint32_t seed(0);
 	
 	cout << "\033[1;36mEnter a seed\033[0m if you want to use a specific seed,"
 		<< " or \033[1;36mjust press enter\033[0m to use the current time as seed: ";
@@ -50,7 +50,7 @@ void seed_selection(void)
 	
 	if (cin.fail() || input.empty() || input == "\n")
 	{
-		__UINT32_TYPE__ time_seed = time(NULL);
+		uint32_t time_seed = time(NULL);
 		srand(time_seed);
 		std::cout << time_seed << "\n";
 	}
@@ -73,6 +73,7 @@ void tests_index(void)
 		make_pair("SAT", sat_test),
 		make_pair("powerset", powerset_test),
 		make_pair("eval set", eval_set_test),
+		make_pair("map", map_test),
 		make_pair("exit", exit_program)};
 
 	cout << "Choose a module to test:\n";

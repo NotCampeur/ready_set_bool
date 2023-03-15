@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:14:42 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/15 16:03:34 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/15 17:23:17 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,26 +96,26 @@ namespace rsb
 	};
 
 	// Specialized token checker for logical evaluation of sets.
-	class set_variable_boolean_token_check : public i_token_check<std::pair<char, rsb::set<__INT32_TYPE__> > >
+	class set_variable_boolean_token_check : public i_token_check<std::pair<char, rsb::set<int32_t> > >
 	{
 		public:
-			bool is_same(const std::pair<char, rsb::set<__INT32_TYPE__> > & token, const char & goal) const
+			bool is_same(const std::pair<char, rsb::set<int32_t> > & token, const char & goal) const
 			{
 				return (token.first == goal);
 			}
 			
-			bool is_operator(const std::pair<char, rsb::set<__INT32_TYPE__> > & token) const
+			bool is_operator(const std::pair<char, rsb::set<int32_t> > & token) const
 			{
 				return (token.first == '!' || token.first == '&' || token.first == '|' ||
 						token.first == '^' || token.first == '>' || token.first == '=');
 			}
 
-			bool is_value(const std::pair<char, rsb::set<__INT32_TYPE__> > & token) const
+			bool is_value(const std::pair<char, rsb::set<int32_t> > & token) const
 			{
 				return ((token.first >= 'A' && token.first <= 'Z') ||
 						token.first == '0' || token.first == '1');
 			}
-			bool is_variable(const std::pair<char, rsb::set<__INT32_TYPE__> > & token) const
+			bool is_variable(const std::pair<char, rsb::set<int32_t> > & token) const
 			{
 				return (token.first >= 'A' && token.first <= 'Z');
 			}

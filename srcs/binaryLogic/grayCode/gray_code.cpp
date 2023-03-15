@@ -6,13 +6,13 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:21:48 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/09 15:22:31 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/15 17:22:49 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ready_set_bool.hpp"
 
-__UINT32_TYPE__ gray_code(__UINT32_TYPE__ n)
+uint32_t gray_code(uint32_t n)
 {
 	return n ^ (n >> 1);
 }

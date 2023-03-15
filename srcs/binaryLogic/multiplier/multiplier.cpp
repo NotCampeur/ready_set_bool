@@ -6,17 +6,17 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:38:42 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/09 14:43:04 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/15 17:45:58 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-__UINT32_TYPE__ adder(__UINT32_TYPE__ a, __UINT32_TYPE__ b);
+#include "ready_set_bool.hpp"
 
-__UINT32_TYPE__ multiplier(__UINT32_TYPE__ a, __UINT32_TYPE__ b)
+uint32_t multiplier(uint32_t a, uint32_t b)
 {
-	__UINT32_TYPE__ result(0);
+	uint32_t result(0);
 
-	for (__UINT32_TYPE__ i(0); i < 32 ; ++i)
+	for (uint32_t i(0); i < 32 ; ++i)
 	{
 		if ((b & (1 << i)) != 0)
 			result = adder(result, a << i);

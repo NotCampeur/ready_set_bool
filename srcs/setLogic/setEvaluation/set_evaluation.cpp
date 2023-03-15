@@ -6,26 +6,26 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:39:06 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/10 22:05:40 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/15 17:23:17 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ready_set_bool.hpp"
 #include "rpn_abstract_syntax_tree.hpp"
 
-rsb::set<__INT32_TYPE__> eval_set(std::string &formula,
-								rsb::set<rsb::set<__INT32_TYPE__> > &sets)
+rsb::set<int32_t> eval_set(std::string &formula,
+								rsb::set<rsb::set<int32_t> > &sets)
 {
 	rsb::rpn_abstract_syntax_tree<
-		std::pair<char, rsb::set<__INT32_TYPE__> >,
+		std::pair<char, rsb::set<int32_t> >,
 		rsb::set_variable_boolean_token_check
 		> tree;
 
-	std::vector<std::pair<char, rsb::set<__INT32_TYPE__> > > build_data;
+	std::vector<std::pair<char, rsb::set<int32_t> > > build_data;
 
-	auto create_set_context = [](const rsb::set<rsb::set<__INT32_TYPE__>> &sets) -> rsb::set<__INT32_TYPE__>
+	auto create_set_context = [](const rsb::set<rsb::set<int32_t>> &sets) -> rsb::set<int32_t>
 	{
-		rsb::set<__INT32_TYPE__> result;
+		rsb::set<int32_t> result;
 
 		for (auto it(sets.begin()); it != sets.end(); ++it)
 			result = result | *it;
@@ -39,7 +39,7 @@ rsb::set<__INT32_TYPE__> eval_set(std::string &formula,
 			if (isupper(c) != 0)
 				build_data.push_back(std::make_pair(c, sets.at(c - 'A')));
 			else
-				build_data.push_back(std::make_pair(c, rsb::set<__INT32_TYPE__>()));
+				build_data.push_back(std::make_pair(c, rsb::set<int32_t>()));
 		}
 	}
 	catch(const std::exception& e)
@@ -57,5 +57,5 @@ rsb::set<__INT32_TYPE__> eval_set(std::string &formula,
 		throw ;
 	}
 	
-	return (rsb::set<__INT32_TYPE__>());
+	return (rsb::set<int32_t>());
 }

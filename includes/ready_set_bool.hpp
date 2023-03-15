@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:56:02 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/09 17:38:56 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/15 17:45:15 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,24 @@
 # define READY_SET_BOOL_HPP
 
 # include <iostream>
+#include <cstdint>
 # include <vector>
 # include <limits>
 # include "math_set.hpp"
-
 // ALGEBRA FUNCTIONS
 
-__UINT32_TYPE__ adder(__UINT32_TYPE__ a, __UINT32_TYPE__ b);
-__UINT32_TYPE__ multiplier(__UINT32_TYPE__ a, __UINT32_TYPE__ b);
-__UINT32_TYPE__ gray_code(__UINT32_TYPE__ n);
+uint32_t adder(uint32_t a, uint32_t b);
+uint32_t multiplier(uint32_t a, uint32_t b);
+uint32_t gray_code(uint32_t n);
 bool eval_formula(const std::string &formula);
 void print_truth_table(const std::string &formula);
 std::string negation_normal_form(const std::string &formula);
 std::string conjunctive_normal_form(const std::string &formula);
 bool sat(std::string & formula);
-rsb::set<rsb::set<__INT32_TYPE__> > powerset(rsb::set<__INT32_TYPE__> set);
-rsb::set<__INT32_TYPE__> eval_set(std::string &formula,
-								rsb::set<rsb::set<__INT32_TYPE__> > &sets);
+rsb::set<rsb::set<int32_t> > powerset(rsb::set<int32_t> set);
+rsb::set<int32_t> eval_set(std::string &formula,
+								rsb::set<rsb::set<int32_t> > &sets);
+double map(uint16_t x, uint16_t y);
 
 // TESTING FUNCTIONS
 
@@ -46,5 +47,6 @@ void conjunctive_normal_form_test(void);
 void sat_test(void);
 void powerset_test(void);
 void eval_set_test(void);
+void map_test(void);
 
 #endif

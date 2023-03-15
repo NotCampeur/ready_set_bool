@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gray_code_tests.cpp                                :+:      :+:    :+:   */
+/*   map_tests.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 15:23:08 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/15 17:22:49 by ldutriez         ###   ########.fr       */
+/*   Created: 2023/03/15 16:40:46 by ldutriez          #+#    #+#             */
+/*   Updated: 2023/03/15 17:47:06 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ready_set_bool.hpp"
 
-void gray_code_test(void)
+void map_test(void)
 {
-	std::cout << "Testing \033[1;37mgray_code\033[0m:\n"
+	std::cout << "Testing \033[1;37mmap\033[0m:\n"
 			<< "\tpress \033[1;36menter\033[0m to keep testing this module, \033[1;36mn\033[0m to move to the next one\n";
 
-	uint32_t a, result;
 	auto tester = [&](void) -> void
 	{
-		a = rand() % 100;
-		result = gray_code(a);
-		std::cout << "Gray code of " << a << " = " << result << "\n";
+		std::cout << "Not implemented yet\n";
 	};
 
 	for (std::string input; input != "n" && std::cin.fail() == false;)

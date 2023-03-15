@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/15 16:01:03 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/15 17:23:17 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,24 +277,24 @@ namespace rsb
 			// throw std::runtime_error if the tree is empty or malformed
 			// throw std::runtime_error if the token checker is not a set_variable_boolean_token_check
 			// throw std::runtime_error if T is not a pair
-			rsb::set<__INT32_TYPE__> set_evaluate(const rsb::set<__INT32_TYPE__> & encompassing_set) const
+			rsb::set<int32_t> set_evaluate(const rsb::set<int32_t> & encompassing_set) const
 			{
-				rsb::set<__INT32_TYPE__> result;
+				rsb::set<int32_t> result;
 
 				if (std::is_same<token_checker, rsb::set_variable_boolean_token_check>::value == false)
 					throw std::runtime_error("Wrong token checker");
-				if (std::is_same<T, std::pair<char, rsb::set<__INT32_TYPE__>>>::value == false)
+				if (std::is_same<T, std::pair<char, rsb::set<int32_t>>>::value == false)
 					throw std::runtime_error("Wrong type");
 				if (_root == nullptr)
 					throw std::runtime_error("Empty or malformed tree");
 				if (_checker.is_value(_root->data) == true)
 				{
-					return rsb::set<__INT32_TYPE__>(_root->data.second);
+					return rsb::set<int32_t>(_root->data.second);
 				}
 				else if (_checker.is_operator(_root->data) == true)
 				{
-					rsb::set<__INT32_TYPE__> left(rpn_abstract_syntax_tree(_root->left).set_evaluate(encompassing_set));
-					rsb::set<__INT32_TYPE__> right;
+					rsb::set<int32_t> left(rpn_abstract_syntax_tree(_root->left).set_evaluate(encompassing_set));
+					rsb::set<int32_t> right;
 
 					if (_checker.is_same(_root->data, '!') == false)
 						right = rpn_abstract_syntax_tree(_root->right).set_evaluate(encompassing_set);
