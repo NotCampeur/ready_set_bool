@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:51:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/10 21:04:46 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/15 16:01:03 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ namespace rsb
 	// You can set a token_checker class to check if T is an operator or a value
 	template <
 		class T,
-		class token_checker = rsb::token_check
+		class token_checker = rsb::i_token_check<T>
 	> class rpn_abstract_syntax_tree
 	{
 		public:
