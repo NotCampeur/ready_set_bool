@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:06:44 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/15 17:22:49 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/15 21:25:01 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void tests_index(void)
 		make_pair("powerset", powerset_test),
 		make_pair("eval set", eval_set_test),
 		make_pair("map", map_test),
+		make_pair("reverse_map", reverse_map_test),
 		make_pair("exit", exit_program)};
 
 	cout << "Choose a module to test:\n";

@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:56:02 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/15 17:45:15 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/15 21:24:11 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ rsb::set<rsb::set<int32_t> > powerset(rsb::set<int32_t> set);
 rsb::set<int32_t> eval_set(std::string &formula,
 								rsb::set<rsb::set<int32_t> > &sets);
 double map(uint16_t x, uint16_t y);
+std::pair<uint16_t, uint16_t> reverse_map(double data);
 
 // TESTING FUNCTIONS
 
@@ -48,5 +49,6 @@ void sat_test(void);
 void powerset_test(void);
 void eval_set_test(void);
 void map_test(void);
+void reverse_map_test(void);
 
 #endif
