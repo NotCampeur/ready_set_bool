@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:45:52 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/15 20:51:46 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/17 15:36:41 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ double map(uint16_t x, uint16_t y)
 		int_result = int_result | ((y & (1 << i)) << (i + 1));
 	}
 	result = int_result;
-	return result / std::pow(2, 32);
+	return result / (std::pow(2, 32) -  1);
 }
