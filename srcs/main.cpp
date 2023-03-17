@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:06:44 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/15 21:25:01 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/17 21:10:29 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,27 @@ void seed_selection(void)
 	cin.clear();
 }
 
+void bijective_test(void)
+{
+	double data;
+	pair<uint16_t, uint16_t> reverse;
+
+	for (uint32_t x(0); x <= 65535; ++x)
+	{
+		for (uint32_t y(0); y <= 65535; ++y)
+		{
+			data = map(x, y);
+			reverse = reverse_map(data);
+			if (x != reverse.first || y != reverse.second)
+			{
+				cout << "\033[0;31mError\033[0m: " << x << ", " << y << " -> " << data << " -> " << reverse.first << ", " << reverse.second << "\n";
+				return;
+			}
+		}
+	}
+	cout << "\033[0;32mSuccess\033[0m\n";
+}
+
 void tests_index(void)
 {
 	static vector<pair<string, void (*)(void)> > test_function = {
@@ -75,6 +96,7 @@ void tests_index(void)
 		make_pair("eval set", eval_set_test),
 		make_pair("map", map_test),
 		make_pair("reverse_map", reverse_map_test),
+		make_pair("bijective", bijective_test),
 		make_pair("exit", exit_program)};
 
 	cout << "Choose a module to test:\n";
@@ -102,6 +124,7 @@ void tests_index(void)
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		((void (*)(void))test_function[input].second)();
+		cout << "end of test" << endl;
 		tests_index();
 	}
 }
