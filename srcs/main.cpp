@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:06:44 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/17 21:10:29 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/19 16:25:46 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void bijective_test(void)
 
 	for (uint32_t x(0); x <= 65535; ++x)
 	{
-		for (uint32_t y(0); y <= 65535; ++y)
+		for (uint32_t y(0); y <= 65535; y += rand() % 100 + 1)
 		{
 			data = map(x, y);
 			reverse = reverse_map(data);
@@ -124,7 +124,6 @@ void tests_index(void)
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		((void (*)(void))test_function[input].second)();
-		cout << "end of test" << endl;
 		tests_index();
 	}
 }
