@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 14:56:15 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/06 16:43:18 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:14:38 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void conjunctive_normal_form_test(void)
 {
-	std::cout << "Testing \033[1;37mconjunctive_normal_form\033[0m:\n"
-			<< "\tpress \033[1;36menter\033[0m to keep testing this module, \033[1;36mn\033[0m to move to the next one\n";
+	std::cout << "Testing " B_WHITE "conjunctive_normal_form" NORMAL ":\n"
+			<< "\tpress " B_CYAN "enter" NORMAL " to keep testing this module, " B_CYAN "n" NORMAL " to move to the next one\n";
 
 	std::string result;
 	std::string formula;

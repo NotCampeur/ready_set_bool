@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:49:08 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/06 16:43:18 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:14:38 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void eval_formula_test(void)
 {
-	std::cout << "Testing \033[1;37meval_formula\033[0m:\n"
-			<< "\tpress \033[1;36menter\033[0m to keep testing this module, \033[1;36mn\033[0m to move to the next one\n";
+	std::cout << "Testing " B_WHITE "eval_formula" NORMAL ":\n"
+			<< "\tpress " B_CYAN "enter" NORMAL " to keep testing this module, " B_CYAN "n" NORMAL " to move to the next one\n";
 
 	bool result;
 	std::string formula;

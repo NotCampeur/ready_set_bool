@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:50:11 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/15 17:23:17 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:14:38 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void eval_set_test(void)
 {
-	std::cout << "Testing \033[1;37meval_set\033[0m:\n"
-			<< "\tpress \033[1;36menter\033[0m to keep testing this module, \033[1;36mn\033[0m to move to the next one\n";
+	std::cout << "Testing " B_WHITE "eval_set" NORMAL ":\n"
+			<< "\tpress " B_CYAN "enter" NORMAL " to keep testing this module, " B_CYAN "n" NORMAL " to move to the next one\n";
 	
 	rsb::set<rsb::set<int32_t> >	sets;
 	std::string formula;
@@ -28,7 +28,7 @@ void eval_set_test(void)
 		unsigned char				count(0);
 
 		sets.clear();
-		std::cout << "Enter \033[1;36msets of integers\033[0m separated by a new line: (empty line to stop)\n"
+		std::cout << "Enter " B_CYAN "sets of integers" NORMAL " separated by a new line: (empty line to stop)\n"
 		 << "\teach integer must be separated by a space:\n";
 		std::cout << "A = ";
 		while (std::getline(std::cin, input) && input != "")
@@ -87,7 +87,7 @@ void eval_set_test(void)
 		}
 		catch(const std::exception& e)
 		{
-			std::cerr << "\033[0;31m" << e.what() << "\033[0m\n";
+			std::cerr << RED << e.what() << "" NORMAL "\n";
 		}
 	};
 

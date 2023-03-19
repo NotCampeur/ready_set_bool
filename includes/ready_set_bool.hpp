@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:56:02 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/15 21:24:11 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:15:01 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,18 @@
 # define READY_SET_BOOL_HPP
 
 # include <iostream>
-#include <cstdint>
+# include <cstdint>
 # include <vector>
 # include <limits>
 # include "math_set.hpp"
+
+# define GREEN "\033[0;32m"
+# define U_GREEN "\033[4;32m"
+# define RED "\033[0;31m"
+# define B_WHITE "\033[1;37m"
+# define B_CYAN "\033[1;36m"
+# define NORMAL "\033[0m"
+
 // ALGEBRA FUNCTIONS
 
 uint32_t adder(uint32_t a, uint32_t b);

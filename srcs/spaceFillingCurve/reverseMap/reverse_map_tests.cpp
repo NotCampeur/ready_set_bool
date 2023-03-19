@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 21:14:36 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/17 18:41:13 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:14:38 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 
 void reverse_map_test(void)
 {
-	std::cout << "Testing \033[1;37mreverse_map\033[0m:\n"
-			<< "\tpress \033[1;36menter\033[0m to keep testing this module, \033[1;36mn\033[0m to move to the next one\n";
+	std::cout << "Testing " B_WHITE "reverse_map" NORMAL ":\n"
+			<< "\tpress " B_CYAN "enter" NORMAL " to keep testing this module, " B_CYAN "n" NORMAL " to move to the next one\n";
 
 	double data(0);
 	std::pair<uint16_t , uint16_t> coordinates;
 	
 	auto get_spatial_data = [&](void) -> bool
 	{
-		std::cout << "Enter the \033[1;36mone dimension value [0;1]\033[0m : ";
+		std::cout << "Enter the " B_CYAN "one dimension value [0;1]" NORMAL " : ";
 		std::cin >> data;
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		if (std::cin.eof() == true || std::cin.fail() == true)
@@ -56,6 +56,6 @@ void reverse_map_test(void)
 		if (std::cin.fail() == false && input.empty() == true)
 			tester();
 		else if (input != "n")
-			std::cout << "\033[0;31mInvalid command : " << input << "\033[0m\n";
+			std::cout << RED"Invalid command : " << input << "" NORMAL "\n";
 	}
 }

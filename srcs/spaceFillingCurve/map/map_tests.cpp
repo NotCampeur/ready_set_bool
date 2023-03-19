@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:40:46 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/17 17:54:00 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:14:38 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 
 void map_test(void)
 {
-	std::cout << "Testing \033[1;37mmap\033[0m:\n"
-			<< "\tpress \033[1;36menter\033[0m to keep testing this module, \033[1;36mn\033[0m to move to the next one\n";
+	std::cout << "Testing " B_WHITE "map" NORMAL ":\n"
+			<< "\tpress " B_CYAN "enter" NORMAL " to keep testing this module, " B_CYAN "n" NORMAL " to move to the next one\n";
 
 	uint16_t x, y = 0;
 	double result = 0;
 	
 	auto get_spatial_data = [&](uint16_t &x, uint16_t &y) -> bool
 	{
-		std::cout << "Enter the x \033[1;36mcoordinate [0;" << std::numeric_limits<uint16_t>::max() << "]\033[0m : ";
+		std::cout << "Enter the x " B_CYAN "coordinate [0;" << std::numeric_limits<uint16_t>::max() << "]" NORMAL " : ";
 		std::cin >> x;
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		if (std::cin.eof() == true || std::cin.fail() == true)
@@ -31,7 +31,7 @@ void map_test(void)
 			std::cin.clear();
 			return false;
 		}
-		std::cout << "Enter the y \033[1;36mcoordinate [0;" << std::numeric_limits<uint16_t>::max() << "]\033[0m : ";
+		std::cout << "Enter the y " B_CYAN "coordinate [0;" << std::numeric_limits<uint16_t>::max() << "]" NORMAL " : ";
 		std::cin >> y;
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		if (std::cin.eof() == true || std::cin.fail() == true)
@@ -57,6 +57,6 @@ void map_test(void)
 		if (std::cin.fail() == false && input.empty() == true)
 			tester();
 		else if (input != "n")
-			std::cout << "\033[0;31mInvalid command : " << input << "\033[0m\n";
+			std::cout << RED"Invalid command : " << input << "" NORMAL "\n";
 	}
 }

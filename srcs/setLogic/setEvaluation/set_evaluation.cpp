@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:39:06 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/15 17:23:17 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:14:06 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ rsb::set<int32_t> eval_set(std::string &formula,
 	}
 	catch(const std::exception& e)
 	{
-		throw std::invalid_argument("\033[0;31mUnable to create build data (formula and sets does not match)\033[0m");
+		throw std::invalid_argument(RED"Unable to create build data (formula and sets does not match)" NORMAL "");
 	}
 
 	try

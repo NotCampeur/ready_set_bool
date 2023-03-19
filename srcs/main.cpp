@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:06:44 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/19 16:25:46 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:11:15 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ using namespace std;
 string get_formula(void)
 {
 	string formula;
-	cout << "Enter a \033[1;36mformula\033[0m: ";
+	cout << "Enter a " B_CYAN "formula" NORMAL ": ";
 	getline(cin, formula);
 	return formula;
 }
 
 void exit_program(void)
 {
-	cout << "\033[1;37mBye!\033[0m\n";
+	cout << B_WHITE "Bye!" NORMAL "\n";
 	exit(EXIT_SUCCESS);
 }
 
@@ -36,8 +36,8 @@ void seed_selection(void)
 	string input;
 	uint32_t seed(0);
 	
-	cout << "\033[1;36mEnter a seed\033[0m if you want to use a specific seed,"
-		<< " or \033[1;36mjust press enter\033[0m to use the current time as seed: ";
+	cout << B_CYAN "Enter a seed" NORMAL " if you want to use a specific seed,"
+		<< " or " B_CYAN "just press enter" NORMAL " to use the current time as seed: ";
 	getline(cin, input);
 	try
 	{
@@ -72,12 +72,12 @@ void bijective_test(void)
 			reverse = reverse_map(data);
 			if (x != reverse.first || y != reverse.second)
 			{
-				cout << "\033[0;31mError\033[0m: " << x << ", " << y << " -> " << data << " -> " << reverse.first << ", " << reverse.second << "\n";
+				cout << RED "Error" NORMAL ": " << x << ", " << y << " -> " << data << " -> " << reverse.first << ", " << reverse.second << "\n";
 				return;
 			}
 		}
 	}
-	cout << "\033[0;32mSuccess\033[0m\n";
+	cout << GREEN "Success" NORMAL "\n";
 }
 
 void tests_index(void)
@@ -99,12 +99,12 @@ void tests_index(void)
 		make_pair("bijective", bijective_test),
 		make_pair("exit", exit_program)};
 
-	cout << "Choose a module to test:\n";
+	cout << B_WHITE "Choose a module to test" NORMAL ":\n";
 	for (unsigned long i(1); i < test_function.size() + 1; i++)
 	{
 		if ((i - 1) % 4 != 0)
 			cout << '\t';
-		cout << "\033[4;32m" << i - 1 << "\033[0m: " << test_function[i - 1].first;
+		cout << U_GREEN << i - 1 << NORMAL ": " << test_function[i - 1].first;
 		if (i % 4 == 0 || i == test_function.size())
 			std::cout << "\n";
 	}
@@ -114,7 +114,7 @@ void tests_index(void)
 		return;
 	if (cin.fail() || input > test_function.size() - 1)
 	{
-		cout << "\033[0;31mInvalid input\033[0m\n";
+		cout << RED "Invalid input" NORMAL "\n";
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		tests_index();
@@ -130,7 +130,7 @@ void tests_index(void)
 
 int main()
 {
-	cout << "\033[1;37mWelcome in RSB!\033[0m\n\n";
+	cout << B_WHITE "Welcome in RSB!" NORMAL "\n\n";
 	seed_selection();
 	tests_index();
 	return EXIT_FAILURE;
