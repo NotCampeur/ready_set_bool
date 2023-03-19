@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:06:44 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/19 17:11:15 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/19 18:53:44 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,13 @@ void tests_index(void)
 	cout << B_WHITE "Choose a module to test" NORMAL ":\n";
 	for (unsigned long i(1); i < test_function.size() + 1; i++)
 	{
-		if ((i - 1) % 4 != 0)
-			cout << '\t';
-		cout << U_GREEN << i - 1 << NORMAL ": " << test_function[i - 1].first;
-		if (i % 4 == 0 || i == test_function.size())
-			std::cout << "\n";
+		cout << GREEN << setw(2) << right << i - 1 << NORMAL ": ";
+		if (i % 4 != 0)
+			cout << setw(20) << left << test_function[i - 1].first;
+		else if (i % 4 == 0)
+			cout << test_function[i - 1].first << "\n";
+		if (i == test_function.size())
+			cout << "\n";
 	}
 	unsigned long input(0);
 	cin >> input;
