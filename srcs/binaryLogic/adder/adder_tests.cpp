@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:54:30 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/20 17:21:23 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/20 19:31:15 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ void adder_test(void)
 			std::cout << "Enter an " B_CYAN "operand" NORMAL " (empty for random): ";
 			std::getline(std::cin, input);
 			if (input.empty() == true && std::cin.fail() == false)
-				return rand() % std::numeric_limits<uint32_t>::max();
+			{
+				uint32_t random_result(rand() % std::numeric_limits<uint32_t>::max());
+				std::cout << B_WHITE << random_result << NORMAL "\n";
+				return random_result;
+			}
 			try
 			{
 				return std::stoul(input);
