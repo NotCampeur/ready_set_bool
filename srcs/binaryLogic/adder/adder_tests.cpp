@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:54:30 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/19 17:14:38 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:03:27 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ void adder_test(void)
 		a = rand() % std::numeric_limits<uint32_t>::max();
 		b = rand() % std::numeric_limits<uint32_t>::max();
 		result = adder(a, b);
-		std::cout << a << " + " << b << " = " << result << " (expected: " << a + b << ")\n";
+		std::cout << a << " + " << b << " = " << result << " (expected: " << a + b << ")";
+		if (result == a + b)
+			std::cout << " " GREEN "OK" NORMAL "\n";
+		else
+			std::cout << " " RED "KO" NORMAL "\n";
 	};
 
 	for (std::string input; input != "n" && std::cin.fail() == false;)
@@ -32,6 +36,6 @@ void adder_test(void)
 		if (input.empty() == true)
 			tester();
 		else if (input != "n")
-			std::cout << "Invalid command : " << input << "\n";
+			std::cout << RED "Invalid input" NORMAL "\n";
 	}
 }
