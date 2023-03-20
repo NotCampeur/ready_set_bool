@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:06:44 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/19 18:53:44 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:30:42 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void bijective_test(void)
 
 void tests_index(void)
 {
+	unsigned long input(0);
 	static vector<pair<string, void (*)(void)> > test_function = {
 		make_pair("adder", adder_test),
 		make_pair("multiplier", multiplier_test),
@@ -99,35 +100,34 @@ void tests_index(void)
 		make_pair("bijective", bijective_test),
 		make_pair("exit", exit_program)};
 
-	cout << B_WHITE "Choose a module to test" NORMAL ":\n";
-	for (unsigned long i(1); i < test_function.size() + 1; i++)
+	while (cin.eof() == false)
 	{
-		cout << GREEN << setw(2) << right << i - 1 << NORMAL ": ";
-		if (i % 4 != 0)
-			cout << setw(20) << left << test_function[i - 1].first;
-		else if (i % 4 == 0)
-			cout << test_function[i - 1].first << "\n";
-		if (i == test_function.size())
-			cout << "\n";
+		cout << B_WHITE "Choose a module to test" NORMAL ":\n";
+		for (unsigned long i(1); i < test_function.size() + 1; i++)
+		{
+			cout << GREEN << setw(2) << right << i - 1 << NORMAL ": ";
+			if (i % 4 != 0)
+				cout << setw(20) << left << test_function[i - 1].first;
+			else if (i % 4 == 0)
+				cout << test_function[i - 1].first << "\n";
+			if (i == test_function.size())
+				cout << "\n";
+		}
+		cin >> input;
+		if (cin.fail() || input > test_function.size() - 1)
+		{
+			cout << RED "Invalid input" NORMAL "\n";
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+		else
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			((void (*)(void))test_function[input].second)();
+		}
 	}
-	unsigned long input(0);
-	cin >> input;
-	if (cin.eof())
-		return;
-	if (cin.fail() || input > test_function.size() - 1)
-	{
-		cout << RED "Invalid input" NORMAL "\n";
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		tests_index();
-	}
-	else
-	{
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		((void (*)(void))test_function[input].second)();
-		tests_index();
-	}
+	exit_program();
 }
 
 int main()
