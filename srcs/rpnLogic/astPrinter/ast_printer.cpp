@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:53:22 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/19 17:14:38 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:07:23 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void ast_printer(void)
 		}
 		catch(const std::exception& e)
 		{
-			tree.print();
-			std::cerr << e.what() << '\n';
+			std::cerr << RED << e.what() << NORMAL "\n";
 		}
 	};
 
@@ -42,6 +41,6 @@ void ast_printer(void)
 		if (input.empty() == true)
 			tester();
 		else if (input != "n")
-			std::cout << "Invalid command : " << input << "\n";
+			std::cout << RED "Invalid input" NORMAL "\n";
 	}
 }
