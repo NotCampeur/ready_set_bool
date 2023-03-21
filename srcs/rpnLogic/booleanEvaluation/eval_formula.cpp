@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:46:39 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/16 15:29:04 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:12:51 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool eval_formula(const std::string &formula)
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cerr << RED << e.what() << NORMAL "\n";
 		return false;
 	}
 }
