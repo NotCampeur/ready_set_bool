@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 04:06:07 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/02/16 15:28:52 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:11:33 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 #include <map>
 #include <algorithm>
 
-// Print the truth table of a formula
-// The accepted formula is a string of characters
-// The variables are the characters from A to Z
 void print_truth_table(const std::string &formula)
 {
 	rsb::rpn_abstract_syntax_tree<char, rsb::variable_boolean_token_check> tree;
@@ -31,7 +28,6 @@ void print_truth_table(const std::string &formula)
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
-		return;
+		std::cerr << RED << e.what() << NORMAL "\n";
 	}
 }
