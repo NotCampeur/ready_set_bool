@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 19:04:10 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/19 17:14:38 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:35:43 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void powerset_test(void)
 		std::string					input;
 
 		set.clear();
-		std::cout << "Enter a set of integers separated by a space: ";
+		std::cout << "Enter " B_CYAN "integers" NORMAL " separated by a " B_CYAN "space" NORMAL ": ";
 		std::getline(std::cin, input);
 		std::stringstream			ss(input);
 		int32_t				i;
@@ -51,14 +51,17 @@ void powerset_test(void)
 	auto stringify_powerset = [&](rsb::set<rsb::set<int32_t> > powerset) -> std::string
 	{
 		std::string					result;
-
+		static std::string			colors[] = {B_GREEN, B_YELLOW, B_BLUE, B_PURPLE, B_CYAN, B_WHITE};
+		unsigned int				color_index = 0;
+		
 		for (rsb::set<rsb::set<int32_t> >::iterator it = powerset.begin(); it != powerset.end(); it++)
 		{
-			result += "{";
-			result += stringify_set(*it);
-			result += "}";
+			result += colors[color_index % 6] + "{" +
+				stringify_set(*it) +
+				 "}" NORMAL;
 			if (it + 1 != powerset.end())
-				result += ", ";
+				result += ",\n\t";
+			++color_index;
 		}
 		return (result);
 	};
@@ -76,6 +79,6 @@ void powerset_test(void)
 		if (input.empty() == true)
 			tester();
 		else if (input != "n")
-			std::cout << "Invalid command : " << input << "\n";
+			std::cout << RED "Invalid input" NORMAL "\n";
 	}
 }
