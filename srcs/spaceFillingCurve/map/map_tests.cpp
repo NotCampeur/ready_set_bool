@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:40:46 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/22 18:08:30 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/23 00:38:20 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,23 @@ void map_test(void)
 	{
 		std::cout << "Enter the x " B_CYAN "coordinate [0;" << std::numeric_limits<uint16_t>::max() << "]" NORMAL " : ";
 		std::cin >> x;
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		if (std::cin.eof() == true || std::cin.fail() == true)
 		{
 			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << RED "Invalid coordinate" NORMAL "\n";
 			return false;
 		}
 		std::cout << "Enter the y " B_CYAN "coordinate [0;" << std::numeric_limits<uint16_t>::max() << "]" NORMAL " : ";
 		std::cin >> y;
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		if (std::cin.eof() == true || std::cin.fail() == true)
 		{
 			std::cin.clear(); 
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << RED "Invalid coordinate" NORMAL "\n";
 			return false;
 		}
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		return true;
 	};
 
