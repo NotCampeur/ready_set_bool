@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:06:44 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/20 17:30:42 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:33:39 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void tests_index(void)
 		make_pair("adder", adder_test),
 		make_pair("multiplier", multiplier_test),
 		make_pair("gray code", gray_code_test),
-		make_pair("ast printer", ast_printer),
 		make_pair("eval formula", eval_formula_test),
 		make_pair("print truth table", print_truth_table_test),
 		make_pair("NNF", negation_normal_form_test),
@@ -98,6 +97,7 @@ void tests_index(void)
 		make_pair("map", map_test),
 		make_pair("reverse_map", reverse_map_test),
 		make_pair("bijective", bijective_test),
+		make_pair("ast printer", ast_printer),
 		make_pair("exit", exit_program)};
 
 	while (cin.eof() == false)
