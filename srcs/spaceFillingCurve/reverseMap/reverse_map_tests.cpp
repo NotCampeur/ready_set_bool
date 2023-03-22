@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 21:14:36 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/19 17:14:38 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:31:12 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void reverse_map_test(void)
 		std::getline(std::cin, input);
 		if (std::cin.fail() == false && input.empty() == true)
 			tester();
-		else if (input != "n")
-			std::cout << RED"Invalid command : " << input << "" NORMAL "\n";
+		else if (input != "n" && std::cin.fail() == false)
+			std::cout << RED "Invalid input" NORMAL "\n";
 	}
 }
