@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 15:49:12 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/19 17:14:38 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:33:00 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void sat_test(void)
 		if (input.empty() == true)
 			tester();
 		else if (input != "n")
-			std::cout << "Invalid command : " << input << "\n";
+			std::cout << RED "Invalid input" NORMAL "\n";
 	}
 	std::cout << std::noboolalpha;
 }
