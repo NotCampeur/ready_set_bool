@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:40:46 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/19 17:14:38 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:08:30 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void map_test(void)
 		std::getline(std::cin, input);
 		if (std::cin.fail() == false && input.empty() == true)
 			tester();
-		else if (input != "n")
-			std::cout << RED"Invalid command : " << input << "" NORMAL "\n";
+		else if (input != "n" && std::cin.fail() == false)
+			std::cout << RED "Invalid input" NORMAL "\n";
 	}
 }
