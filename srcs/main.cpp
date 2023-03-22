@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:06:44 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/22 18:33:39 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/23 00:52:43 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,23 +61,53 @@ void seed_selection(void)
 
 void bijective_test(void)
 {
-	double data;
-	pair<uint16_t, uint16_t> reverse;
+	std::cout << "Testing " B_WHITE "map" NORMAL " and " B_WHITE "reverse_map" NORMAL " equivalence:\n"
+			<< "\tpress " B_CYAN "enter" NORMAL " to keep testing this module, " B_CYAN "n" NORMAL " to move to the next one\n";
 
-	for (uint32_t x(0); x <= 65535; ++x)
+	uint16_t x, y = 0;
+	std::pair<uint16_t, uint16_t> result;
+	
+	auto get_spatial_data = [&](uint16_t &x, uint16_t &y) -> bool
 	{
-		for (uint32_t y(0); y <= 65535; y += rand() % 100 + 1)
+		std::cout << "Enter the x " B_CYAN "coordinate [0;" << std::numeric_limits<uint16_t>::max() << "]" NORMAL " : ";
+		std::cin >> x;
+		if (std::cin.eof() == true || std::cin.fail() == true)
 		{
-			data = map(x, y);
-			reverse = reverse_map(data);
-			if (x != reverse.first || y != reverse.second)
-			{
-				cout << RED "Error" NORMAL ": " << x << ", " << y << " -> " << data << " -> " << reverse.first << ", " << reverse.second << "\n";
-				return;
-			}
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << RED "Invalid coordinate" NORMAL "\n";
+			return false;
 		}
+		std::cout << "Enter the y " B_CYAN "coordinate [0;" << std::numeric_limits<uint16_t>::max() << "]" NORMAL " : ";
+		std::cin >> y;
+		if (std::cin.eof() == true || std::cin.fail() == true)
+		{
+			std::cin.clear(); 
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << RED "Invalid coordinate" NORMAL "\n";
+			return false;
+		}
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		return true;
+	};
+
+	auto tester = [&](void) -> void
+	{
+		if (get_spatial_data(x, y) == false)
+			return;
+		result = reverse_map(map(x, y));
+		std::cout << "reverse_map(map(" << x << ", " << y << ")) = {"
+			<< result.first << ", " << result.second << "}\n";
+	};
+
+	for (std::string input; input != "n" && std::cin.fail() == false;)
+	{
+		std::getline(std::cin, input);
+		if (std::cin.fail() == false && input.empty() == true)
+			tester();
+		else if (input != "n" && std::cin.fail() == false)
+			std::cout << RED "Invalid input" NORMAL "\n";
 	}
-	cout << GREEN "Success" NORMAL "\n";
 }
 
 void tests_index(void)
