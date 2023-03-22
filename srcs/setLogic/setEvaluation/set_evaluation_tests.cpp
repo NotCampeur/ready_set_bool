@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:50:11 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/19 17:14:38 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:52:22 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,6 @@ void eval_set_test(void)
 		if (input.empty() == true)
 			tester();
 		else if (input != "n")
-			std::cout << "Invalid command : " << input << "\n";
+			std::cout << RED "Invalid input" NORMAL "\n";
 	}
 }
