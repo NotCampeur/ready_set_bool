@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 21:14:36 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/22 18:31:12 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/23 00:48:16 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,21 @@ void reverse_map_test(void)
 	{
 		std::cout << "Enter the " B_CYAN "one dimension value [0;1]" NORMAL " : ";
 		std::cin >> data;
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		if (std::cin.eof() == true || std::cin.fail() == true)
 		{
 			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << RED "Invalid value" NORMAL "\n";
 			return false;
 		}
 		if (data < 0 || data > 1)
 		{
+			std::cout << RED "Invalid interval" NORMAL "\n";
 			std::cin.clear();
 			std::cin.putback('\n');
 			return false;
 		}
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		return true;
 	};
 
