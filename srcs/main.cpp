@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:06:44 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/23 01:43:02 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:45:16 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ void tests_index(void)
 				cout << test_function[i - 1].first << "\n";
 		}
 		cin >> input;
+		if (cin.eof() == true)
+			break;
 		if (cin.fail() || input > test_function.size() - 1)
 		{
 			cout << RED "Invalid input" NORMAL "\n";
