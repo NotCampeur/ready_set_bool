@@ -6,14 +6,14 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:39:06 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/19 17:14:06 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:59:37 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ready_set_bool.hpp"
 #include "rpn_abstract_syntax_tree.hpp"
 
-rsb::set<int32_t> eval_set(std::string &formula,
+rsb::set<int32_t> eval_set(const std::string &formula,
 								rsb::set<rsb::set<int32_t> > &sets)
 {
 	rsb::rpn_abstract_syntax_tree<
