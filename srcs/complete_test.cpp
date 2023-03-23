@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 01:35:51 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/23 16:17:53 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:29:44 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,5 +187,88 @@ void complete_test(void)
 			}
 			std::cout << "] (" << sets.size() << " subset)\n";
 		}
+	}
+	{
+		std::cout << "\t" B_WHITE "set evaluation" NORMAL ":\n";
+		std::cout << U_WHITE "Basic tests\n" NORMAL;
+		
+		rsb::set<rsb::set<int32_t>> sets;
+		auto test = [](const std::string &formula, const rsb::set<rsb::set<int32_t> > &sets) -> void
+		{
+			rsb::set<int32_t> result_set;
+			result_set = eval_set(formula, sets);
+			std::cout << "Formula `" << formula << "` with [";
+			for (rsb::set<rsb::set<int32_t>>::size_type i(0); i < sets.size(); ++i)
+			{
+				std::cout << '[';
+				for (rsb::set<int32_t>::size_type j(0); j < sets[i].size(); ++j)
+				{
+					std::cout << sets[i][j];
+					if (j < sets[i].size() - 1)
+						std::cout << ", ";
+				}
+				std::cout << ']';
+				if (i < sets.size() - 1)
+					std::cout << ", ";
+			}
+			std::cout << "] return [";
+			for (rsb::set<int32_t>::size_type j(0); j < result_set.size(); ++j)
+			{
+				std::cout << result_set[j];
+				if (j < result_set.size() - 1)
+					std::cout << ", ";
+			}
+			std::cout << "]\n";
+		};
+
+		sets.clear();
+		sets.push_back(rsb::set<int32_t>());
+		test("A", sets);
+
+		test("A!", sets);
+
+		sets.clear();
+		sets.push_back(rsb::set<int32_t>());
+		sets[0].push_back(42);
+		test("A", sets);
+
+		test("A!", sets);
+
+		sets.clear();
+		sets.push_back(rsb::set<int32_t>());
+		sets.push_back(rsb::set<int32_t>());
+		sets[1].push_back(42);
+		test("A!", sets);
+
+		sets.clear();
+		sets.push_back(rsb::set<int32_t>());
+		sets[0].push_back(0);
+		sets[0].push_back(1);
+		sets[0].push_back(2);
+		sets.push_back(rsb::set<int32_t>());
+		test("AB|", sets);
+
+		test("AB&", sets);
+
+		sets[1].push_back(0);
+		test("AB&", sets);
+
+		sets[1][0] = 42;
+		test("AB&", sets);
+
+		sets[1][0] = 0;
+		test("AB^", sets);
+
+		sets.clear();
+		sets.push_back(rsb::set<int32_t>());
+		sets[0].push_back(0);
+		sets.push_back(rsb::set<int32_t>());
+		sets[1].push_back(1);
+		sets[1].push_back(2);
+		test("AB>", sets);
+
+		sets[1].insert(sets[1].begin(), 0);
+		test("AB>", sets);
+		std::cout << U_WHITE "Composition\n" NORMAL;
 	}
 }
