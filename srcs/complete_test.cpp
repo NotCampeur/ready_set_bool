@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 01:35:51 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/23 02:42:29 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/23 03:20:58 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,27 @@ void complete_test(void)
 		std::cout << "Formula `ABC&|!` is `" << conjunctive_normal_form("ABC&|!") << "`\n";
 		std::cout << "Formula `ABC^^` is `" << conjunctive_normal_form("ABC^^") << "`\n";
 		std::cout << "Formula `ABC>>` is `" << conjunctive_normal_form("ABC>>") << "`\n";
+	}
+	{
+		std::cout << "\t" B_WHITE "satisfiability" NORMAL ":\n";
+		std::cout << std::boolalpha;
+		std::cout << U_WHITE "Basic tests\n" NORMAL;
+		std::cout << "Satisfiability of formula `A` is `" << sat("A") << "`\n";
+		std::cout << "Satisfiability of formula `A!` is `" << sat("A!") << "`\n";
+		std::cout << "Satisfiability of formula `AA|` is `" << sat("AA|") << "`\n";
+		std::cout << "Satisfiability of formula `AA&` is `" << sat("AA&") << "`\n";
+		std::cout << "Satisfiability of formula `AA!&` is `" << sat("AA!&") << "`\n";
+		std::cout << "Satisfiability of formula `AA^` is `" << sat("AA^") << "`\n";
+		std::cout << "Satisfiability of formula `AB^` is `" << sat("AB^") << "`\n";
+		std::cout << "Satisfiability of formula `AB=` is `" << sat("AB=") << "`\n";
+		std::cout << "Satisfiability of formula `AA>` is `" << sat("AA>") << "`\n";
+		std::cout << "Satisfiability of formula `AA!>` is `" << sat("AA!>") << "`\n";
+		std::cout << U_WHITE "Composition\n" NORMAL;
+		std::cout << "Satisfiability of formula `ABC||` is `" << sat("ABC||") << "`\n";
+		std::cout << "Satisfiability of formula `AB&A!B!&&` is `" << sat("AB&A!B!&&") << "`\n";
+		std::cout << "Satisfiability of formula `ABCDE&&&&` is `" << sat("ABCDE&&&&") << "`\n";
+		std::cout << "Satisfiability of formula `AAA^^` is `" << sat("AAA^^") << "`\n";
+		std::cout << "Satisfiability of formula `ABCDE^^^^` is `" << sat("ABCDE^^^^") << "`\n";
+		std::cout << std::noboolalpha;
 	}
 }
