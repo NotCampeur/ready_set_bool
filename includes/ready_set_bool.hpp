@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:56:02 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/22 16:26:37 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/23 01:22:25 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ void powerset_test(void);
 void eval_set_test(void);
 void map_test(void);
 void reverse_map_test(void);
+void bijective_test(void);
 
 #endif
