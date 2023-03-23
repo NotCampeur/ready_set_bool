@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:06:44 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/23 01:18:56 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/23 01:43:02 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void tests_index(void)
 		make_pair("reverse_map", reverse_map_test),
 		make_pair("bijective", bijective_test),
 		make_pair("ast printer", ast_printer),
+		make_pair("complete", complete_test),
 		make_pair("exit", exit_program)};
 
 	while (cin.eof() == false)
@@ -89,8 +90,6 @@ void tests_index(void)
 				cout << setw(20) << left << test_function[i - 1].first;
 			else if (i % 4 == 0)
 				cout << test_function[i - 1].first << "\n";
-			if (i == test_function.size())
-				cout << "\n";
 		}
 		cin >> input;
 		if (cin.fail() || input > test_function.size() - 1)
