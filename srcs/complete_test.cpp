@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 01:35:51 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/23 12:32:48 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:17:53 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void complete_test(void)
 		std::cout << U_WHITE "Basic tests\n" NORMAL;
 		std::cout << "Formula `A` is `" << negation_normal_form("A") << "`\n";
 		std::cout << "Formula `A!` is `" << negation_normal_form("A!") << "`\n";
-		std::cout << "Formula `AB&|` is `" << negation_normal_form("AB&|") << "`\n";
+		std::cout << "Formula `AB&!` is `" << negation_normal_form("AB&!") << "`\n";
 		std::cout << "Formula `AB|!` is `" << negation_normal_form("AB|!") << "`\n";
 		std::cout << "Formula `AB>!` is `" << negation_normal_form("AB>!") << "`\n";
 		std::cout << "Formula `AB=!` is `" << negation_normal_form("AB=!") << "`\n";
