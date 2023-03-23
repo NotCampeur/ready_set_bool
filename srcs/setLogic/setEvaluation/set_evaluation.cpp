@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:39:06 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/23 16:59:37 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:18:23 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "rpn_abstract_syntax_tree.hpp"
 
 rsb::set<int32_t> eval_set(const std::string &formula,
-								rsb::set<rsb::set<int32_t> > &sets)
+								const rsb::set<rsb::set<int32_t> > &sets)
 {
 	rsb::rpn_abstract_syntax_tree<
 		std::pair<char, rsb::set<int32_t> >,
