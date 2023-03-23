@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:40:46 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/23 00:38:20 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/23 01:05:59 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void map_test(void)
 {
 	std::cout << "Testing " B_WHITE "map" NORMAL ":\n"
-			<< "\tpress " B_CYAN "enter" NORMAL " to keep testing this module, " B_CYAN "n" NORMAL " to move to the next one\n";
+			<< "\tpress " B_CYAN "enter" NORMAL " to keep testing this module, " B_CYAN "i" NORMAL " to go back to the index\n";
 
 	uint16_t x, y = 0;
 	double result = 0;
@@ -54,12 +54,12 @@ void map_test(void)
 		std::cout << "The reverse space filling curve of {x=" << x << ", y=" << y << "} is: " << std::fixed << result << "\n";
 	};
 
-	for (std::string input; input != "n" && std::cin.fail() == false;)
+	for (std::string input; input != "i" && std::cin.fail() == false;)
 	{
 		std::getline(std::cin, input);
 		if (std::cin.fail() == false && input.empty() == true)
 			tester();
-		else if (input != "n" && std::cin.fail() == false)
+		else if (input != "i" && std::cin.fail() == false)
 			std::cout << RED "Invalid input" NORMAL "\n";
 	}
 }

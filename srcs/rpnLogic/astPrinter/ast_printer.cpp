@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:53:22 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/21 15:07:23 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/23 01:05:59 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void ast_printer(void)
 {
 	std::cout << B_WHITE "Visualizing the AST" NORMAL ":\n"
-			<< "\tpress " B_CYAN "enter" NORMAL " to keep testing this module, " B_CYAN "n" NORMAL " to move to the next one\n";
+			<< "\tpress " B_CYAN "enter" NORMAL " to keep testing this module, " B_CYAN "i" NORMAL " to go back to the index\n";
 
 	rsb::rpn_abstract_syntax_tree<char, rsb::variable_boolean_token_check> tree;
 	std::string formula;
@@ -35,12 +35,12 @@ void ast_printer(void)
 		}
 	};
 
-	for (std::string input; input != "n" && std::cin.fail() == false;)
+	for (std::string input; input != "i" && std::cin.fail() == false;)
 	{
 		std::getline(std::cin, input);
 		if (input.empty() == true)
 			tester();
-		else if (input != "n")
+		else if (input != "i")
 			std::cout << RED "Invalid input" NORMAL "\n";
 	}
 }
