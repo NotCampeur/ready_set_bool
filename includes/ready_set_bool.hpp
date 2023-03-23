@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:56:02 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/23 03:15:38 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:01:08 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ std::string negation_normal_form(const std::string &formula);
 std::string conjunctive_normal_form(const std::string &formula);
 bool sat(const std::string & formula);
 rsb::set<rsb::set<int32_t> > powerset(rsb::set<int32_t> set);
-rsb::set<int32_t> eval_set(std::string &formula,
+rsb::set<int32_t> eval_set(const std::string &formula,
 								rsb::set<rsb::set<int32_t> > &sets);
 double map(uint16_t x, uint16_t y);
 std::pair<uint16_t, uint16_t> reverse_map(double data);
