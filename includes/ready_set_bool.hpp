@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:56:02 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/23 01:38:59 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/23 02:10:10 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define B_BLUE "\033[1;34m"
 # define PURPLE "\033[0;35m"
 # define B_PURPLE "\033[1;35m"
+# define U_WHITE "\033[4;37m"
 # define B_WHITE "\033[1;37m"
 # define B_CYAN "\033[1;36m"
 # define NORMAL "\033[0m"
