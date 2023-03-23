@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 01:35:51 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/23 02:16:51 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/23 02:42:29 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,41 @@ void complete_test(void)
 		print_truth_table("AB>C>");
 		std::cout << "Formula: AB>A>A>\n";
 		print_truth_table("AB>A>A>");
+	}
+	{
+		std::cout << "\t" B_WHITE "negation normal form" NORMAL ":\n";
+		std::cout << U_WHITE "Basic tests\n" NORMAL;
+		std::cout << "Formula `A` is `" << negation_normal_form("A") << "`\n";
+		std::cout << "Formula `A!` is `" << negation_normal_form("A!") << "`\n";
+		std::cout << "Formula `AB&|` is `" << negation_normal_form("AB&|") << "`\n";
+		std::cout << "Formula `AB|!` is `" << negation_normal_form("AB|!") << "`\n";
+		std::cout << "Formula `AB>!` is `" << negation_normal_form("AB>!") << "`\n";
+		std::cout << "Formula `AB=!` is `" << negation_normal_form("AB=!") << "`\n";
+		std::cout << U_WHITE "Composition\n" NORMAL;
+		std::cout << "Formula `ABC||` is `" << negation_normal_form("ABC||") << "`\n";
+		std::cout << "Formula `ABC||!` is `" << negation_normal_form("ABC||!") << "`\n";
+		std::cout << "Formula `ABC|&` is `" << negation_normal_form("ABC|&") << "`\n";
+		std::cout << "Formula `ABC&|` is `" << negation_normal_form("ABC&|") << "`\n";
+		std::cout << "Formula `ABC&|!` is `" << negation_normal_form("ABC&|!") << "`\n";
+		std::cout << "Formula `ABC^^` is `" << negation_normal_form("ABC^^") << "`\n";
+		std::cout << "Formula `ABC>>` is `" << negation_normal_form("ABC>>") << "`\n";
+	}
+	{
+		std::cout << "\t" B_WHITE "conjunctive normal form" NORMAL ":\n";
+		std::cout << U_WHITE "Basic tests\n" NORMAL;
+		std::cout << "Formula `A` is `" << conjunctive_normal_form("A") << "`\n";
+		std::cout << "Formula `A!` is `" << conjunctive_normal_form("A!") << "`\n";
+		std::cout << "Formula `AB&!` is `" << conjunctive_normal_form("AB&!") << "`\n";
+		std::cout << "Formula `AB|!` is `" << conjunctive_normal_form("AB|!") << "`\n";
+		std::cout << "Formula `AB>!` is `" << conjunctive_normal_form("AB>!") << "`\n";
+		std::cout << "Formula `AB=!` is `" << conjunctive_normal_form("AB=!") << "`\n";
+		std::cout << U_WHITE "Composition\n" NORMAL;
+		std::cout << "Formula `ABC||` is `" << conjunctive_normal_form("ABC||") << "`\n";
+		std::cout << "Formula `ABC||!` is `" << conjunctive_normal_form("ABC||!") << "`\n";
+		std::cout << "Formula `ABC|&` is `" << conjunctive_normal_form("ABC|&") << "`\n";
+		std::cout << "Formula `ABC&|` is `" << conjunctive_normal_form("ABC&|") << "`\n";
+		std::cout << "Formula `ABC&|!` is `" << conjunctive_normal_form("ABC&|!") << "`\n";
+		std::cout << "Formula `ABC^^` is `" << conjunctive_normal_form("ABC^^") << "`\n";
+		std::cout << "Formula `ABC>>` is `" << conjunctive_normal_form("ABC>>") << "`\n";
 	}
 }
