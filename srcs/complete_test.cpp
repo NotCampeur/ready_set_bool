@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 01:35:51 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/23 17:29:44 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:38:38 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,5 +270,30 @@ void complete_test(void)
 		sets[1].insert(sets[1].begin(), 0);
 		test("AB>", sets);
 		std::cout << U_WHITE "Composition\n" NORMAL;
+
+		sets.clear();
+		sets.push_back(rsb::set<int32_t>());
+		sets.push_back(rsb::set<int32_t>());
+		sets.push_back(rsb::set<int32_t>());
+		test("ABC||", sets);
+
+		sets[0].push_back(0);
+		sets[1].push_back(1);
+		sets[2].push_back(2);
+		test("ABC||", sets);
+
+		sets[1][0] = 0;
+		sets[2][0] = 0;
+		test("ABC||", sets);
+
+		sets[2].clear();
+		test("ABC&&", sets);
+
+		sets[2].push_back(0);
+		test("ABC&&", sets);
+
+		test("ABC^^", sets);
+
+		test("ABC>>", sets);
 	}
 }
