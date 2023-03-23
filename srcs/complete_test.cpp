@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 01:35:51 by ldutriez          #+#    #+#             */
-/*   Updated: 2023/03/23 03:20:58 by ldutriez         ###   ########.fr       */
+/*   Updated: 2023/03/23 12:32:48 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,5 +150,42 @@ void complete_test(void)
 		std::cout << "Satisfiability of formula `AAA^^` is `" << sat("AAA^^") << "`\n";
 		std::cout << "Satisfiability of formula `ABCDE^^^^` is `" << sat("ABCDE^^^^") << "`\n";
 		std::cout << std::noboolalpha;
+	}
+	{
+		std::cout << "\t" B_WHITE "powerset" NORMAL ":\n";
+		rsb::set<rsb::set<int32_t>> sets;
+		rsb::set<int32_t> set;
+		int32_t numbers[] = {0, 1, 2};
+		
+
+		for (int32_t test_index(0); test_index < 4; ++test_index)
+		{
+			set.clear();
+			for (int32_t i(0); i < test_index; ++i)
+				set.push_back(numbers[i]);
+			sets = powerset(set);
+			std::cout << '[';
+			for (rsb::set<int32_t>::size_type i(0); i < set.size(); ++i)
+			{
+				std::cout << set[i];
+				if (i < set.size() - 1)
+					std::cout << ", ";
+			}
+			std::cout << "] gives [";
+			for (rsb::set<rsb::set<int32_t>>::size_type i(0); i < sets.size(); ++i)
+			{
+				std::cout << '[';
+				for (rsb::set<int32_t>::size_type j(0); j < sets[i].size(); ++j)
+				{
+					std::cout << sets[i][j];
+					if (j < sets[i].size() - 1)
+						std::cout << ", ";
+				}
+				std::cout << ']';
+				if (i < sets.size() - 1)
+					std::cout << ", ";
+			}
+			std::cout << "] (" << sets.size() << " subset)\n";
+		}
 	}
 }
